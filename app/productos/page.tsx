@@ -436,12 +436,12 @@ function ProductCard({ product, viewMode, index }: { product: any; viewMode: "gr
                   <Link href={`/productos/${product.id}`}>{product.name}</Link>
                 </h3>
               </div>
-              <button
+              {/* <button
                 onClick={() => setIsFavorite(!isFavorite)}
                 className={`p-2 rounded-full mt-2 sm:mt-0 ${isFavorite ? "text-red-500" : "text-gray-400 hover:text-red-500"}`}
               >
                 <Heart className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`} />
-              </button>
+              </button> */}
             </div>
 
             <div className="flex items-center mb-3">
@@ -496,14 +496,14 @@ function ProductCard({ product, viewMode, index }: { product: any; viewMode: "gr
             Oferta
           </span>
         )}
-        <button
+        {/* <button
           onClick={() => setIsFavorite(!isFavorite)}
           className={`absolute ${product.isSale ? "top-10" : "top-2"} right-2 p-2 rounded-full bg-white shadow-md ${
             isFavorite ? "text-red-500" : "text-gray-400 hover:text-red-500"
           } z-10`}
         >
           <Heart className={`w-4 h-4 ${isFavorite ? "fill-current" : ""}`} />
-        </button>
+        </button> */}
         <Link href={`/productos/${product.id}`}>
           <ProductImage
             productId={product.id}

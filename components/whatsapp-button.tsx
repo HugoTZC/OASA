@@ -4,7 +4,7 @@ import { MessageCircle } from "lucide-react"
 
 export function WhatsAppButton() {
   const handleWhatsAppClick = () => {
-    window.open("https://wa.me/528004276272", "_blank")
+    window.open("https://wa.me/526561234567", "_blank")
   }
 
   return (
@@ -15,7 +15,7 @@ export function WhatsAppButton() {
     >
       <MessageCircle className="w-6 h-6" />
       <span className="absolute -top-2 -left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full whitespace-nowrap">
-        ¡Escríbenos por WhatsApp!
+        ¡Escríbenos!
       </span>
     </button>
   )
