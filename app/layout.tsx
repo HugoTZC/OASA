@@ -5,6 +5,7 @@ import "./globals.css"
 import { AuthProvider } from "@/contexts/auth-context"
 import { ShoppingProvider } from "@/contexts/shopping-context"
 import { SiteSettingsProvider } from "@/contexts/site-settings-context"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const inter = Inter({ subsets: ["latin"] })
 
