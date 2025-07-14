@@ -545,7 +545,7 @@ function ProductCard({ product, viewMode, index }: { product: any; viewMode: "gr
           )}
         </div>
 
-        {shouldShowAddToCart && (
+        {/* {shouldShowAddToCart && (
           <button
             disabled={!product.inStock}
             className="w-full bg-blue-800 text-white py-2 px-4 rounded-md hover:bg-blue-900 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm"
@@ -553,7 +553,7 @@ function ProductCard({ product, viewMode, index }: { product: any; viewMode: "gr
             <ShoppingCart className="w-4 h-4" />
             {product.inStock ? "Agregar al Carrito" : "Agotado"}
           </button>
-        )}
+        )} */}
       </div>
     </div>
   )

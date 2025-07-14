@@ -141,7 +141,7 @@ export function Header() {
                     0
                   </span> */}
                 </div>
-                <span className="text-sm">Carrito</span>
+                {/* <span className="text-sm">Carrito</span> */}
               </Link>
             )}
           </div>
@@ -149,12 +149,12 @@ export function Header() {
           {/* Mobile Cart Icon */}
           {user?.role !== "admin" && shouldShowCart && (
             <Link href="/cart" className="md:hidden flex items-center">
-              <div className="relative">
+              {/* <div className="relative">
                 <ShoppingCart className="w-6 h-6" />
                 <span className="absolute -top-2 -right-2 bg-blue-800 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
                   0
                 </span>
-              </div>
+              </div> */}
             </Link>
           )}
         </div>
@@ -239,7 +239,7 @@ export function Header() {
         <div className="md:hidden bg-white border-t border-gray-200 absolute top-full left-0 right-0 z-50 max-h-screen overflow-y-auto">
           <div className="px-4 py-2 space-y-1">
             {/* User Actions */}
-            <div className="border-b border-gray-200 pb-3 mb-3">
+            {/* <div className="border-b border-gray-200 pb-3 mb-3">
               {user ? (
                 <>
                   <div className="py-2 text-sm text-gray-600">{user.name}</div>
@@ -260,7 +260,7 @@ export function Header() {
               <Link href="/cart" className="block py-2 text-gray-700 hover:text-blue-800 text-sm">
                 Carrito
               </Link>
-            </div>
+            </div> */}
 
             {/* Navigation Links */}
             <Link href="/" className="block py-3 text-gray-700 hover:text-blue-800 border-b border-gray-100 text-sm">
@@ -278,7 +278,7 @@ export function Header() {
             >
               Productos
             </Link>
-            <Link
+            {/* <Link
               href="/creditos"
               className="block py-3 text-gray-700 hover:text-blue-800 border-b border-gray-100 text-sm"
             >
@@ -307,7 +307,7 @@ export function Header() {
               className="block py-3 text-gray-700 hover:text-blue-800 border-b border-gray-100 text-sm"
             >
               Atención a clientes
-            </Link>
+            </Link> */}
             <Link href="/catalogo" className="block py-3 text-gray-700 hover:text-blue-800 text-sm">
               Catálogo de Productos
             </Link>
