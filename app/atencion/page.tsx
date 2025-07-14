@@ -4,7 +4,7 @@ const representatives = [
   {
     name: "Carlos Mendoza",
     position: "Gerente de Atención al Cliente",
-    phone: "(686) 516-4283 ext. 101",
+    phone: "(656) 123-4567 ext. 101",
     email: "carlos.mendoza@tiendaoasa.com",
     specialties: ["Consultas generales", "Quejas y sugerencias", "Escalación de casos"],
     image: "/placeholder.svg?height=200&width=200",
@@ -13,7 +13,7 @@ const representatives = [
   {
     name: "Ana García",
     position: "Especialista en Créditos",
-    phone: "(686) 516-4283 ext. 102",
+    phone: "(656) 123-4567 ext. 102",
     email: "ana.garcia@tiendaoasa.com",
     specialties: ["Solicitudes de crédito", "Términos de pago", "Financiamiento"],
     image: "/placeholder.svg?height=200&width=200",
@@ -22,7 +22,7 @@ const representatives = [
   {
     name: "Roberto Silva",
     position: "Soporte Técnico",
-    phone: "(686) 516-4283 ext. 103",
+    phone: "(656) 123-4567 ext. 103",
     email: "roberto.silva@tiendaoasa.com",
     specialties: ["Asesoría técnica", "Instalaciones", "Mantenimiento"],
     image: "/placeholder.svg?height=200&width=200",
@@ -31,7 +31,7 @@ const representatives = [
   {
     name: "María López",
     position: "Ventas Corporativas",
-    phone: "(686) 516-4283 ext. 104",
+    phone: "(656) 123-4567 ext. 104",
     email: "maria.lopez@tiendaoasa.com",
     specialties: ["Ventas mayoreo", "Cotizaciones", "Proyectos especiales"],
     image: "/placeholder.svg?height=200&width=200",
@@ -40,7 +40,7 @@ const representatives = [
   {
     name: "Fernando Ruiz",
     position: "Servicio Post-Venta",
-    phone: "(686) 516-4283 ext. 105",
+    phone: "(656) 123-4567 ext. 105",
     email: "fernando.ruiz@tiendaoasa.com",
     specialties: ["Garantías", "Devoluciones", "Seguimiento de pedidos"],
     image: "/placeholder.svg?height=200&width=200",
@@ -49,7 +49,7 @@ const representatives = [
   {
     name: "Patricia Vega",
     position: "Atención a Sucursales",
-    phone: "(686) 516-4283 ext. 106",
+    phone: "(656) 123-4567 ext. 106",
     email: "patricia.vega@tiendaoasa.com",
     specialties: ["Coordinación sucursales", "Inventarios", "Logística"],
     image: "/placeholder.svg?height=200&width=200",
@@ -68,7 +68,7 @@ const contactMethods = [
   {
     icon: Phone,
     title: "Oficina Tijuana",
-    info: "(686) 516-4283",
+    info: "(656) 123-4567",
     description: "Atención directa desde nuestra oficina principal",
     available: "Lun-Vie 8:00-18:00",
   },
@@ -229,7 +229,7 @@ export default function AtencionPage() {
                 <div className="space-y-2">
                   <div className="flex items-center">
                     <Phone className="w-4 h-4 text-green-600 mr-3" />
-                    <span className="text-gray-700">(686) 516-4283 {dept.phone}</span>
+                    <span className="text-gray-700">(656) 123-4567 {dept.phone}</span>
                   </div>
                   <div className="flex items-center">
                     <Mail className="w-4 h-4 text-blue-600 mr-3" />

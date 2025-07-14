@@ -57,7 +57,7 @@ export default function ServiciosPage() {
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl font-bold mb-6">Servicios Industriales</h1>
             <p className="text-xl mb-8 leading-relaxed">
-              Soluciones técnicas especializadas para optimizar tus procesos industriales. Más de 70 años de experiencia
+              Soluciones técnicas especializadas para optimizar tus procesos industriales. Más deXX años de experiencia
               al servicio de la industria mexicana.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

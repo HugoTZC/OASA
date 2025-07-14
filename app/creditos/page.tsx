@@ -65,7 +65,7 @@ export default function CreditosPage() {
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl font-bold mb-6">Soluciones de Crédito</h1>
             <p className="text-xl mb-8 leading-relaxed">
-              Impulsa tu negocio con nuestras opciones de financiamiento flexibles. Más de 70 años respaldando el
+              Impulsa tu negocio con nuestras opciones de financiamiento flexibles. Más deXX años respaldando el
               crecimiento de empresas mexicanas.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

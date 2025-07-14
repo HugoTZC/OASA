@@ -21,7 +21,7 @@ export function Footer() {
           </div>
 
           {/* MENÚ Column */}
-          <div>
+          {/* <div>
             <h3 className="text-yellow-400 font-bold text-base sm:text-lg mb-3 sm:mb-4">MENÚ</h3>
             <ul className="text-xs sm:text-sm space-y-1 sm:space-y-2">
               <li>
@@ -50,7 +50,7 @@ export function Footer() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </div> */}
 
           {/* PROMOCIONES Column */}
           <div>

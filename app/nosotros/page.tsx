@@ -87,7 +87,7 @@ export default function NosotrosPage() {
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="text-5xl font-bold mb-6">Nosotros Somos OASA</h1>
               <p className="text-xl mb-8 leading-relaxed">
-                Durante más de 70 años, hemos sido la tienda de los expertos, brindando soluciones integrales en gases
+                Durante más deXX años, hemos sido la tienda de los expertos, brindando soluciones integrales en gases
                 industriales y herramientas especializadas para impulsar el crecimiento de nuestros
                 clientes.
               </p>
@@ -133,7 +133,7 @@ export default function NosotrosPage() {
                 <div>
                   <h2 className="text-2xl font-bold text-blue-900 mb-4">Nuestra Historia</h2>
                   <p className="text-gray-700 mb-4">
-                    Con más de 70 años de experiencia en el mercado, OASA se ha consolidado como la empresa líder en la
+                    Con más deXX años de experiencia en el mercado, OASA se ha consolidado como la empresa líder en la
                     distribución de gases industriales, autopartes, herramientas y equipos de soldadura en México.
                   </p>
                   <p className="text-gray-700 mb-4">
@@ -144,7 +144,7 @@ export default function NosotrosPage() {
                 <div className="bg-gray-100 p-6 rounded-lg">
                   <h3 className="text-xl font-bold text-blue-900 mb-4">Datos Importantes</h3>
                   <ul className="space-y-2 text-gray-700">
-                    <li>• Más de 70 años de experiencia</li>
+                    <li>• Más deXX años de experiencia</li>
                     <li>• Presencia en todo México</li>
                     <li>• Más de 50,000 productos</li>
                     <li>• Certificaciones internacionales</li>

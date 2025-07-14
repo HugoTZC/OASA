@@ -8,7 +8,7 @@ const features = [
   },
   {
     icon: Phone,
-    title: "(686) 516-4283",
+    title: "(656) 123-4567",
     description: "Atención a Clientes",
   },
   {
