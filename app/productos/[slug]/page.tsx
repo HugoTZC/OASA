@@ -1,5 +1,6 @@
 "use client"
 
+import { use } from "react"
 import { Star, ShoppingCart, Heart, ArrowLeft, Home, ChevronRight } from "lucide-react"
 import { useShoppingFeatures } from "@/hooks/use-shopping-features"
 import { SiteLayout } from "@/components/site-layout"
@@ -7,13 +8,16 @@ import { ProductImage } from "@/components/dynamic-image"
 import { useProductImages } from "@/hooks/use-images"
 import Link from "next/link"
 
-export default function ProductPage({ params }: { params: { slug: string } }) {
+export default function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { shouldShowPrices, shouldShowAddToCart } = useShoppingFeatures()
   
+  // Unwrap params using React.use()
+  const { slug } = use(params)
+  
   // Extract product ID from slug (you can implement your own logic)
-  const productId = params.slug.includes('tanque') ? 1 : 
-                   params.slug.includes('soldadora') ? 2 : 
-                   params.slug.includes('herramientas') ? 3 : 1
+  const productId = slug.includes('tanque') ? 1 : 
+                   slug.includes('soldadora') ? 2 : 
+                   slug.includes('herramientas') ? 3 : 1
   
   // Get product images from API
   const { images: productImages, loading: imagesLoading } = useProductImages(productId, { 
@@ -155,8 +159,8 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           <div className="text-sm text-blue-800 mb-2">{product.category}</div>
           <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
 
-          {/* Rating */}
-          <div className="flex items-center mb-4">
+          {/* Rating section commented out per client request */}
+          {/* <div className="flex items-center mb-4">
             <div className="flex items-center">
               {[...Array(5)].map((_, i) => (
                 <Star
@@ -166,17 +170,17 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
               ))}
             </div>
             <span className="ml-2 text-gray-600">({product.reviews} reseñas)</span>
-          </div>
+          </div> */}
 
-          {/* Price */}
-          {shouldShowPrices && (
+          {/* Price section commented out per client request */}
+          {/* {shouldShowPrices && (
             <div className="mb-6">
               <span className="text-3xl font-bold text-gray-900">{product.price}</span>
               {product.originalPrice && (
                 <span className="ml-2 text-lg text-gray-500 line-through">{product.originalPrice}</span>
               )}
             </div>
-          )}
+          )} */}
 
           {/* Description */}
           <p className="text-gray-600 mb-6">{product.description}</p>
@@ -194,7 +198,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             </ul>
           </div>
 
-          {/* Actions */}
+          {/* Actions - Shopping features commented out per client request */}
           {/* <div className="flex space-x-4 mb-6">
             {shouldShowAddToCart && (
               <button className="flex-1 bg-blue-800 text-white py-3 px-6 rounded-md hover:bg-blue-900 transition-colors flex items-center justify-center">

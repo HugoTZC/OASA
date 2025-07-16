@@ -1,6 +1,9 @@
+import { SiteLayout } from "@/components/site-layout"
+
 export default function SucursalesPage() {
   return (
-    <main className="container mx-auto px-4 py-8">
+    <SiteLayout>
+      <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold mb-8">Sucursales</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <div className="bg-white p-6 rounded-lg shadow-md">
@@ -25,6 +28,7 @@ export default function SucursalesPage() {
           <p className="text-gray-600">Lun-Vie: 8:00-18:00</p>
         </div>
       </div>
-    </main>
+      </div>
+    </SiteLayout>
   )
 }

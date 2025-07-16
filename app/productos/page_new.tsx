@@ -63,8 +63,8 @@ function FilterSidebar({
         </div>
       </div>
 
-      {/* Price Range filter commented out per client request */}
-      {/* {shouldShowPrices && (
+      {/* Price Range */}
+      {shouldShowPrices && (
         <div className="mb-6">
           <h4 className="font-semibold mb-3">Rango de Precio</h4>
           <div className="space-y-3">
@@ -87,7 +87,7 @@ function FilterSidebar({
             </div>
           </div>
         </div>
-      )} */}
+      )}
 
       {/* Additional Filters */}
       <div className="mb-6">
@@ -102,8 +102,7 @@ function FilterSidebar({
             />
             <span className="text-sm">Solo en stock</span>
           </label>
-          {/* New and Sale filters commented out per client request */}
-          {/* <label className="flex items-center">
+          <label className="flex items-center">
             <input
               type="checkbox"
               checked={showOnlyNew}
@@ -120,7 +119,7 @@ function FilterSidebar({
               className="mr-2"
             />
             <span className="text-sm">En oferta</span>
-          </label> */}
+          </label>
         </div>
       </div>
     </div>
@@ -143,10 +142,6 @@ function ProductCard({ product, viewMode, index, shouldShowPrices, shouldShowAdd
       <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group">
         <div className="flex">
           <div className="w-48 h-48 relative flex-shrink-0">
-            {/* Featured product star for list view */}
-            {product.isFeatured && (
-              <Star className="absolute top-2 right-2 w-5 h-5 text-yellow-500 fill-yellow-500 z-10 drop-shadow-sm" />
-            )}
             <Link href={`/productos/${product.id}`}>
               <ProductImage
                 productId={product.id}
@@ -185,18 +180,16 @@ function ProductCard({ product, viewMode, index, shouldShowPrices, shouldShowAdd
               </div>
               
               <div className="text-right ml-4">
-                {/* Price section commented out per client request */}
-                {/* {shouldShowPrices && (
+                {shouldShowPrices && (
                   <div className="mb-4">
                     <span className="text-2xl font-bold text-gray-900">${product.price.toLocaleString()}</span>
                     {product.originalPrice && (
                       <span className="ml-2 text-lg text-gray-500 line-through">${product.originalPrice.toLocaleString()}</span>
                     )}
                   </div>
-                )} */}
+                )}
                 
-                {/* Shopping features commented out per client request */}
-                {/* {shouldShowAddToCart && (
+                {shouldShowAddToCart && (
                   <button
                     disabled={!product.inStock}
                     className="bg-blue-800 text-white py-2 px-6 rounded-md hover:bg-blue-900 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center gap-2"
@@ -204,7 +197,7 @@ function ProductCard({ product, viewMode, index, shouldShowPrices, shouldShowAdd
                     <ShoppingCart className="w-4 h-4" />
                     {product.inStock ? "Agregar al Carrito" : "Agotado"}
                   </button>
-                )} */}
+                )}
               </div>
             </div>
           </div>
@@ -215,13 +208,13 @@ function ProductCard({ product, viewMode, index, shouldShowPrices, shouldShowAdd
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group">
-      {/* Product Badges - commented out per client request */}
+      {/* Product Badges */}
       <div className="relative">
         {/* Featured product star */}
         {product.isFeatured && (
           <Star className="absolute top-2 right-2 w-5 h-5 text-yellow-500 fill-yellow-500 z-10 drop-shadow-sm" />
         )}
-        {/* {product.isNew && (
+        {product.isNew && (
           <span className="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full z-10">
             Nuevo
           </span>
@@ -230,7 +223,7 @@ function ProductCard({ product, viewMode, index, shouldShowPrices, shouldShowAdd
           <span className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full z-10">
             Oferta
           </span>
-        )} */}
+        )}
         {!product.inStock && (
           <span className="absolute top-2 left-2 bg-gray-500 text-white text-xs px-2 py-1 rounded-full z-10">
             Agotado
@@ -270,19 +263,17 @@ function ProductCard({ product, viewMode, index, shouldShowPrices, shouldShowAdd
         </div> */}
 
         <div className="mb-3">
-          {/* Price section commented out per client request */}
-          {/* {shouldShowPrices && (
+          {shouldShowPrices && (
             <>
               <span className="text-base md:text-lg font-bold text-gray-900">${product.price.toLocaleString()}</span>
               {product.originalPrice && (
                 <span className="ml-2 text-sm text-gray-500 line-through">${product.originalPrice.toLocaleString()}</span>
               )}
             </>
-          )} */}
+          )}
         </div>
 
-        {/* Shopping features commented out per client request */}
-        {/* {shouldShowAddToCart && (
+        {shouldShowAddToCart && (
           <button
             disabled={!product.inStock}
             className="w-full bg-blue-800 text-white py-2 px-4 rounded-md hover:bg-blue-900 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm"
@@ -290,7 +281,7 @@ function ProductCard({ product, viewMode, index, shouldShowPrices, shouldShowAdd
             <ShoppingCart className="w-4 h-4" />
             {product.inStock ? "Agregar al Carrito" : "Agotado"}
           </button>
-        )} */}
+        )}
       </div>
     </div>
   )
@@ -368,7 +359,7 @@ export default function ProductsPage() {
 
   return (
     <SiteLayout>
-      <div className="bg-gray-50 min-h-screen">
+      <main className="bg-gray-50 min-h-screen">
         <CategoryBreadcrumb category={selectedCategory} />
 
         {/* Hero Section */}
@@ -603,7 +594,7 @@ export default function ProductsPage() {
             </div>
           </div>
         </div>
-      </div>
+      </main>
     </SiteLayout>
   )
 }
@@ -611,7 +602,7 @@ export default function ProductsPage() {
 function ProductsPageSkeleton() {
   return (
     <SiteLayout>
-      <div className="bg-gray-50 min-h-screen">
+      <main className="bg-gray-50 min-h-screen">
         <div className="bg-white border-b border-gray-200 py-3">
           <div className="container mx-auto px-4">
             <div className="flex items-center space-x-2 text-sm">
@@ -675,7 +666,7 @@ function ProductsPageSkeleton() {
             </div>
           </div>
         </div>
-      </div>
+      </main>
     </SiteLayout>
   )
 }

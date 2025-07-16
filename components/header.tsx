@@ -133,30 +133,31 @@ export function Header() {
               </div>
             )}
 
-            {user?.role !== "admin" && shouldShowCart && (
+            {/* Shopping cart functionality commented out per client request */}
+            {/* {user?.role !== "admin" && shouldShowCart && (
               <Link href="/cart" className="flex items-center gap-2">
                 <div className="relative">
-                  {/* <ShoppingCart className="w-6 h-6" />
+                  <ShoppingCart className="w-6 h-6" />
                   <span className="absolute -top-2 -right-2 bg-blue-800 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                     0
-                  </span> */}
+                  </span>
                 </div>
-                {/* <span className="text-sm">Carrito</span> */}
+                <span className="text-sm">Carrito</span>
               </Link>
-            )}
+            )} */}
           </div>
 
-          {/* Mobile Cart Icon */}
-          {user?.role !== "admin" && shouldShowCart && (
+          {/* Mobile Cart Icon - commented out per client request */}
+          {/* {user?.role !== "admin" && shouldShowCart && (
             <Link href="/cart" className="md:hidden flex items-center">
-              {/* <div className="relative">
+              <div className="relative">
                 <ShoppingCart className="w-6 h-6" />
                 <span className="absolute -top-2 -right-2 bg-blue-800 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
                   0
                 </span>
-              </div> */}
+              </div>
             </Link>
-          )}
+          )} */}
         </div>
 
         {/* Mobile Search Bar */}
@@ -238,7 +239,7 @@ export function Header() {
       {isMobileMenuOpen && user?.role !== "admin" && (
         <div className="md:hidden bg-white border-t border-gray-200 absolute top-full left-0 right-0 z-50 max-h-screen overflow-y-auto">
           <div className="px-4 py-2 space-y-1">
-            {/* User Actions */}
+            {/* User Actions and cart functionality commented out per client request */}
             {/* <div className="border-b border-gray-200 pb-3 mb-3">
               {user ? (
                 <>

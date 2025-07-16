@@ -2,12 +2,14 @@
 
 import { useState } from "react"
 import { Search } from "lucide-react"
+import { SiteLayout } from "@/components/site-layout"
 
 export default function SearchPage() {
   const [searchQuery, setSearchQuery] = useState("")
 
   return (
-    <main className="container mx-auto px-4 py-8">
+    <SiteLayout>
+      <div className="container mx-auto px-4 py-8">
       <div className="text-center py-16">
         <h1 className="text-3xl font-bold mb-4">El producto que estas buscando aun no esta en web.</h1>
         <p className="text-gray-600 mb-8">Por favor contactanos al 686 518 4283 para mas información.</p>
@@ -31,6 +33,7 @@ export default function SearchPage() {
           Haz clic aquí para seguir comprando
         </a>
       </div>
-    </main>
+      </div>
+    </SiteLayout>
   )
 }

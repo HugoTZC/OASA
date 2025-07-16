@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { Star } from "lucide-react"
 import { ProductImage } from "./dynamic-image"
 import { ImageSkeleton } from "./image-skeleton"
 import { useShoppingFeatures } from "@/hooks/use-shopping-features"
@@ -84,7 +85,9 @@ export function ProductsShowcase() {
           {products.map((product, index) => (
             <Link key={product.id} href={product.href} className="group">
               <div className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-200">
-                <div className="aspect-square bg-gray-100 flex items-center justify-center overflow-hidden">
+                <div className="aspect-square bg-gray-100 flex items-center justify-center overflow-hidden relative">
+                  {/* Featured product star */}
+                  <Star className="absolute top-2 right-2 w-5 h-5 text-yellow-500 fill-yellow-500 z-10 drop-shadow-sm" />
                   <ProductImage
                     productId={product.id}
                     width={200}
@@ -100,7 +103,8 @@ export function ProductsShowcase() {
                   <h3 className="font-semibold text-gray-900 mt-1 group-hover:text-blue-800 line-clamp-2">
                     {product.name}
                   </h3>
-                  {shouldShowPrices && (
+                  {/* Price section commented out per client request */}
+                  {/* {shouldShowPrices && (
                     <div className="mt-2">
                       <span className="text-lg font-bold text-gray-900">${product.price.toLocaleString()}</span>
                       {product.originalPrice && (
@@ -109,7 +113,7 @@ export function ProductsShowcase() {
                         </span>
                       )}
                     </div>
-                  )}
+                  )} */}
                 </div>
               </div>
             </Link>
