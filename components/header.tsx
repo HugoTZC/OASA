@@ -190,11 +190,11 @@ export function Header() {
                   Inicio
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/nosotros" className="text-gray-700 hover:text-blue-800 whitespace-nowrap">
                   Nosotros
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href="/productos" className="text-gray-700 hover:text-blue-800 whitespace-nowrap">
                   Productos
@@ -225,11 +225,11 @@ export function Header() {
                   Atención a clientes
                 </Link>
               </li> */}
-              <li>
+              {/* <li>
                 <Link href="/catalogo" className="text-gray-700 hover:text-blue-800 whitespace-nowrap">
                   Catálogo de Productos
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </nav>
         )}
