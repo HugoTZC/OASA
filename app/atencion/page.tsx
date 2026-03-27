@@ -104,7 +104,7 @@ export default function AtencionPage() {
       <section className="bg-gradient-to-r from-green-800 to-blue-800 text-white py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold mb-6">Atención a Clientes</h1>
+            <h1 className="text-5xl font-bold mb-6">Contactanos</h1>
             <p className="text-xl mb-8 leading-relaxed">
               Estamos aquí para ayudarte. Nuestro equipo de especialistas está disponible para resolver tus dudas,
               procesar tus pedidos y brindarte el mejor servicio.

@@ -190,11 +190,11 @@ export function Header() {
                   Inicio
                 </Link>
               </li>
-              {/* <li>
+              <li>
                 <Link href="/nosotros" className="text-gray-700 hover:text-blue-800 whitespace-nowrap">
                   Nosotros
                 </Link>
-              </li> */}
+              </li>
               <li>
                 <Link href="/productos" className="text-gray-700 hover:text-blue-800 whitespace-nowrap">
                   Productos
@@ -209,22 +209,22 @@ export function Header() {
                 <Link href="/servicios" className="text-gray-700 hover:text-blue-800 whitespace-nowrap">
                   Servicios Industriales
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link href="/sucursales" className="text-gray-700 hover:text-blue-800 whitespace-nowrap">
                   Sucursales
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/blog" className="text-gray-700 hover:text-blue-800 whitespace-nowrap">
                   Blog
                 </Link>
               </li> */}
-              {/* <li>
+              <li>
                 <Link href="/atencion" className="text-gray-700 hover:text-blue-800 whitespace-nowrap">
-                  Atención a clientes
+                  Contactanos
                 </Link>
-              </li> */}
+              </li>
               {/* <li>
                 <Link href="/catalogo" className="text-gray-700 hover:text-blue-800 whitespace-nowrap">
                   Catálogo de Productos
