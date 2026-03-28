@@ -1,4 +1,9 @@
-import { Phone, Mail, Clock, User, MessageCircle, Headphones } from "lucide-react"
+"use client"
+
+import { Phone, Mail, Clock, User, MessageCircle, Headphones, Send } from "lucide-react"
+import { SiteLayout } from "@/components/site-layout"
+import Altcha from "@/components/altcha"
+import { useState } from "react"
 
 const representatives = [
   {
@@ -98,173 +103,367 @@ const departments = [
 ]
 
 export default function AtencionPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    setIsSubmitting(true)
+    
+    // Simulate form submission
+    await new Promise((resolve) => setTimeout(resolve, 1500))
+    
+    setIsSubmitting(false)
+    setSubmitSuccess(true)
+    setFormData({ name: "", email: "", phone: "", subject: "", message: "" })
+    
+    // Reset success message after 5 seconds
+    setTimeout(() => setSubmitSuccess(false), 5000)
+  }
+
   return (
-    <main>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-green-800 to-blue-800 text-white py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold mb-6">Contactanos</h1>
-            <p className="text-xl mb-8 leading-relaxed">
-              Estamos aquí para ayudarte. Nuestro equipo de especialistas está disponible para resolver tus dudas,
-              procesar tus pedidos y brindarte el mejor servicio.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors">
-                Llamar Ahora
-              </button>
-              <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-green-800 transition-colors">
-                Enviar WhatsApp
-              </button>
+    <SiteLayout>
+      <main>
+        {/* Hero Section */}
+        <section className="bg-gradient-to-r from-green-800 to-blue-800 text-white py-20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto text-center">
+              <h1 className="text-5xl font-bold mb-6">Contactanos</h1>
+              <p className="text-xl mb-8 leading-relaxed">
+                Estamos aquí para ayudarte. Nuestro equipo de especialistas está disponible para resolver tus dudas,
+                procesar tus pedidos y brindarte el mejor servicio.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a 
+                  href="tel:656-123-4567"
+                  className="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors inline-block text-center"
+                >
+                  Llamar Ahora
+                </a>
+                <a 
+                  href="https://wa.me/526865164283"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-green-800 transition-colors inline-block text-center"
+                >
+                  Enviar WhatsApp
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Contact Methods */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4 text-gray-900">Formas de Contacto</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Elige el método que más te convenga para comunicarte con nosotros
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {contactMethods.map((method, index) => {
-              const IconComponent = method.icon
-              return (
-                <div key={index} className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                  <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                    <IconComponent className="w-8 h-8 text-green-800" />
+        {/* Contact Form Section */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-4xl font-bold mb-4 text-gray-900">Envíanos un Mensaje</h2>
+                <p className="text-xl text-gray-600">
+                  Completa el formulario y nos pondremos en contacto contigo lo antes posible
+                </p>
+              </div>
+              
+              <form onSubmit={handleSubmit} className="bg-gray-50 p-8 rounded-xl shadow-lg">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                      Nombre completo *
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all"
+                      placeholder="Tu nombre"
+                    />
                   </div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900">{method.title}</h3>
-                  <p className="text-2xl font-bold text-green-800 mb-2">{method.info}</p>
-                  <p className="text-gray-600 mb-3">{method.description}</p>
-                  <span className="text-sm text-blue-800 font-medium">{method.available}</span>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                      Correo electrónico *
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all"
+                      placeholder="tu@correo.com"
+                    />
+                  </div>
                 </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                      Teléfono
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all"
+                      placeholder="(656) 123-4567"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                      Asunto *
+                    </label>
+                    <select
+                      id="subject"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all bg-white"
+                    >
+                      <option value="">Selecciona un assunto</option>
+                      <option value="consulta">Consulta general</option>
+                      <option value="pedido">Información de pedido</option>
+                      <option value="credito">Créditos y financing</option>
+                      <option value="garantia">Garantías y devoluciones</option>
+                      <option value="soporte">Soporte técnico</option>
+                      <option value="queja">Quejas y sugerencias</option>
+                      <option value="otro">Otro</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div className="mb-6">
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                    Mensaje *
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
+                    rows={5}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all resize-none"
+                    placeholder="¿En qué podemos ayudarte?"
+                  />
+                </div>
 
-      {/* Representatives */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4 text-gray-900">Nuestros Representantes</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Conoce a nuestro equipo de especialistas, cada uno experto en su área
-            </p>
+                {/* ALTCHA Captcha */}
+                <div className="mb-6 flex justify-center">
+                  <div className="bg-white p-4 rounded-lg border border-gray-200">
+                    <Altcha />
+                  </div>
+                </div>
+
+                {submitSuccess && (
+                  <div className="mb-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg text-center">
+                    ¡Gracias por tu mensaje! Te contactaremos pronto.
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={`w-full py-4 px-6 rounded-lg font-bold text-lg transition-all flex items-center justify-center gap-2 ${
+                    isSubmitting
+                      ? "bg-gray-400 text-gray-700 cursor-not-allowed"
+                      : "bg-green-600 text-white hover:bg-green-700"
+                  }`}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <span className="animate-spin">⏳</span>
+                      Enviando...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      Enviar Mensaje
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {representatives.map((rep, index) => (
-              <div
-                key={index}
-                className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow"
+        </section>
+
+        {/* Contact Methods */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4 text-gray-900">Formas de Contacto</h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Elige el método que más te convenga para comunicarte con nosotros
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {contactMethods.map((method, index) => {
+                const IconComponent = method.icon
+                return (
+                  <div key={index} className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                    <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                      <IconComponent className="w-8 h-8 text-green-800" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-2 text-gray-900">{method.title}</h3>
+                    <p className="text-2xl font-bold text-green-800 mb-2">{method.info}</p>
+                    <p className="text-gray-600 mb-3">{method.description}</p>
+                    <span className="text-sm text-blue-800 font-medium">{method.available}</span>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Representatives */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4 text-gray-900">Nuestros Representantes</h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Conoce a nuestro equipo de especialistas, cada uno experto en su área
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {representatives.map((rep, index) => (
+                <div
+                  key={index}
+                  className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow"
+                >
+                  <div className="text-center mb-4">
+                    <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
+                      <User className="w-12 h-12 text-gray-400" />
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900">{rep.name}</h3>
+                    <p className="text-blue-800 font-medium">{rep.position}</p>
+                  </div>
+
+                  <div className="space-y-3 mb-4">
+                    <div className="flex items-center">
+                      <Phone className="w-4 h-4 text-green-600 mr-3" />
+                      <span className="text-gray-700">{rep.phone}</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Mail className="w-4 h-4 text-blue-600 mr-3" />
+                      <span className="text-gray-700 text-sm">{rep.email}</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Clock className="w-4 h-4 text-orange-600 mr-3" />
+                      <span className="text-gray-700 text-sm">{rep.available}</span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-2">Especialidades:</h4>
+                    <ul className="space-y-1">
+                      {rep.specialties.map((specialty, specIndex) => (
+                        <li key={specIndex} className="text-sm text-gray-600 flex items-center">
+                          <span className="w-2 h-2 bg-blue-800 rounded-full mr-2"></span>
+                          {specialty}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="mt-4 pt-4 border-t border-gray-200 flex gap-2">
+                    <a 
+                      href={`tel:${rep.phone.replace(/[^0-9]/g, '')}`}
+                      className="flex-1 bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors text-sm text-center"
+                    >
+                      Llamar
+                    </a>
+                    <a 
+                      href={`mailto:${rep.email}`}
+                      className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm text-center"
+                    >
+                      Email
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Departments */}
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4 text-gray-900">Departamentos</h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Contacta directamente al departamento que necesites
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {departments.map((dept, index) => (
+                <div key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                  <h3 className="text-lg font-bold text-gray-900 mb-3">{dept.name}</h3>
+                  <div className="space-y-2">
+                    <div className="flex items-center">
+                      <Phone className="w-4 h-4 text-green-600 mr-3" />
+                      <span className="text-gray-700">(656) 123-4567 {dept.phone}</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Mail className="w-4 h-4 text-blue-600 mr-3" />
+                      <span className="text-gray-700 text-sm">{dept.email}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Emergency Contact */}
+        <section className="py-16 bg-red-800 text-white">
+          <div className="container mx-auto px-4 text-center">
+            <Headphones className="w-16 h-16 mx-auto mb-6" />
+            <h2 className="text-4xl font-bold mb-6">Soporte de Emergencia</h2>
+            <p className="text-xl mb-8 max-w-3xl mx-auto">
+              Para situaciones urgentes relacionadas con gases industriales o equipos críticos, contamos con soporte 24/7
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+              <a 
+                href="tel:656-123-4567"
+                className="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors inline-block"
               >
-                <div className="text-center mb-4">
-                  <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <User className="w-12 h-12 text-gray-400" />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900">{rep.name}</h3>
-                  <p className="text-blue-800 font-medium">{rep.position}</p>
-                </div>
-
-                <div className="space-y-3 mb-4">
-                  <div className="flex items-center">
-                    <Phone className="w-4 h-4 text-green-600 mr-3" />
-                    <span className="text-gray-700">{rep.phone}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <Mail className="w-4 h-4 text-blue-600 mr-3" />
-                    <span className="text-gray-700 text-sm">{rep.email}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <Clock className="w-4 h-4 text-orange-600 mr-3" />
-                    <span className="text-gray-700 text-sm">{rep.available}</span>
-                  </div>
-                </div>
-
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-2">Especialidades:</h4>
-                  <ul className="space-y-1">
-                    {rep.specialties.map((specialty, specIndex) => (
-                      <li key={specIndex} className="text-sm text-gray-600 flex items-center">
-                        <span className="w-2 h-2 bg-blue-800 rounded-full mr-2"></span>
-                        {specialty}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="mt-4 pt-4 border-t border-gray-200 flex gap-2">
-                  <button className="flex-1 bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors text-sm">
-                    Llamar
-                  </button>
-                  <button className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm">
-                    Email
-                  </button>
-                </div>
-              </div>
-            ))}
+                Llamada de Emergencia
+              </a>
+              <a 
+                href="https://wa.me/526865164283?text=URGENTE"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-red-800 transition-colors inline-block"
+              >
+                WhatsApp Urgente
+              </a>
+            </div>
+            <div className="text-2xl font-bold">
+              <Phone className="w-8 h-8 inline mr-2" />
+              656-123-4567
+            </div>
+            <p className="text-red-200 mt-2">Disponible 24 horas, 7 días a la semana</p>
           </div>
-        </div>
-      </section>
-
-      {/* Departments */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4 text-gray-900">Departamentos</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Contacta directamente al departamento que necesites
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {departments.map((dept, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                <h3 className="text-lg font-bold text-gray-900 mb-3">{dept.name}</h3>
-                <div className="space-y-2">
-                  <div className="flex items-center">
-                    <Phone className="w-4 h-4 text-green-600 mr-3" />
-                    <span className="text-gray-700">(656) 123-4567 {dept.phone}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <Mail className="w-4 h-4 text-blue-600 mr-3" />
-                    <span className="text-gray-700 text-sm">{dept.email}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Emergency Contact */}
-      <section className="py-16 bg-red-800 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <Headphones className="w-16 h-16 mx-auto mb-6" />
-          <h2 className="text-4xl font-bold mb-6">Soporte de Emergencia</h2>
-          <p className="text-xl mb-8 max-w-3xl mx-auto">
-            Para situaciones urgentes relacionadas con gases industriales o equipos críticos, contamos con soporte 24/7
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <button className="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors">
-              Llamada de Emergencia
-            </button>
-            <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-red-800 transition-colors">
-              WhatsApp Urgente
-            </button>
-          </div>
-          <div className="text-2xl font-bold">
-            <Phone className="w-8 h-8 inline mr-2" />
-            656-123-4567
-          </div>
-          <p className="text-red-200 mt-2">Disponible 24 horas, 7 días a la semana</p>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </SiteLayout>
   )
 }

@@ -32,16 +32,31 @@ export function HeroCarousel() {
   }, [slides.length])
 
   const fetchSlides = async () => {
-    try {
-      const response = await fetch("/api/admin/hero-slides")
-      const data = await response.json()
-      if (data.success) {
-        setSlides(data.data)
-      }
-    } catch (error) {
-      console.error("Failed to fetch slides:", error)
-      // Fallback to static data if API fails
-      setSlides([
+    // try {
+    //   const response = await fetch("/api/admin/hero-slides")
+    //   const data = await response.json()
+    //   if (data.success) {
+    //     setSlides(data.data)
+    //   }
+    // } catch (error) {
+    //   console.error("Failed to fetch slides:", error)
+    //   // Fallback to static data if API fails
+    //   setSlides([
+    //     {
+    //       id: "1",
+    //       title: "VISITA NUESTRO",
+    //       subtitle: "CATÁLOGO DIGITAL",
+    //       cta: "HAZ CLIC AQUÍ",
+    //       image: "/images/hero-tablet.png",
+    //       background: "bg-gradient-to-r from-blue-900 via-blue-800 to-purple-900",
+    //       order: 1,
+    //       isActive: true,
+    //       createdAt: "",
+    //       updatedAt: "",
+    //     },
+    //   ])
+    // }
+    setSlides([
         {
           id: "1",
           title: "VISITA NUESTRO",
@@ -55,7 +70,6 @@ export function HeroCarousel() {
           updatedAt: "",
         },
       ])
-    }
   }
 
   const nextSlide = () => {
