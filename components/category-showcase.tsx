@@ -4,10 +4,9 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { CategoryImage } from "./dynamic-image"
-import type { CategoryShowcase as CategoryShowcaseType } from "@/types/admin"
 
 export function CategoryShowcase() {
-  const [categories, setCategories] = useState<CategoryShowcaseType[]>([])
+  const [categories, setCategories] = useState<Array<{id: string, name: string, description: string, productCount: string, href: string}>>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -16,10 +15,17 @@ export function CategoryShowcase() {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch("/api/admin/category-showcase")
+      const response = await fetch("/api/categories")
       const data = await response.json()
-      if (data.success) {
-        setCategories(data.data)
+      if (data.success && Array.isArray(data.categories)) {
+        const mappedData = data.categories.slice(0, 3).map((cat: { name: string, productCount: number }) => ({
+          id: cat.name,
+          name: cat.name,
+          description: "",
+          productCount: `${cat.productCount} productos`,
+          href: `/productos?categoria=${encodeURIComponent(cat.name)}`,
+        }))
+        setCategories(mappedData)
       }
     } catch (error) {
       console.error("Failed to fetch categories:", error)
@@ -29,37 +35,36 @@ export function CategoryShowcase() {
           id: "1",
           name: "Gases Industriales",
           description: "Oxígeno, argón, acetileno y más gases para uso industrial",
-          productCount: "500+ productos",
-          image: "/placeholder.svg?height=200&width=300",
+          productCount: "45 productos",
           href: "/productos?categoria=Gases Industriales",
-          order: 1,
-          isActive: true,
-          createdAt: "",
-          updatedAt: "",
         },
         {
           id: "2",
           name: "Equipos de Soldadura",
           description: "Soldadoras, electrodos y accesorios profesionales",
-          productCount: "300+ productos",
-          image: "/placeholder.svg?height=200&width=300",
+          productCount: "32 productos",
           href: "/productos?categoria=Equipos de Soldadura",
-          order: 2,
-          isActive: true,
-          createdAt: "",
-          updatedAt: "",
         },
         {
           id: "3",
           name: "Herramientas",
           description: "Herramientas manuales y eléctricas de calidad",
-          productCount: "800+ productos",
-          image: "/placeholder.svg?height=200&width=300",
+          productCount: "28 productos",
           href: "/productos?categoria=Herramientas",
-          order: 3,
-          isActive: true,
-          createdAt: "",
-          updatedAt: "",
+        },
+        {
+          id: "4",
+          name: "Protección Industrial",
+          description: "Equipo de protección personal para industriales",
+          productCount: "15 productos",
+          href: "/productos?categoria=Protección Industrial",
+        },
+        {
+          id: "5",
+          name: "Accesorios",
+          description: "Accesorios y complementos para diversas aplicaciones",
+          productCount: "12 productos",
+          href: "/productos?categoria=Accesorios",
         },
       ])
     } finally {

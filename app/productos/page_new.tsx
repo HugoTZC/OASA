@@ -211,7 +211,7 @@ function ProductCard({ product, viewMode, index, shouldShowPrices, shouldShowAdd
       {/* Product Badges */}
       <div className="relative">
         {/* Featured product star */}
-        {product.isFeatured && (
+        {product.hierarchy === 1 && (
           <Star className="absolute top-2 right-2 w-5 h-5 text-yellow-500 fill-yellow-500 z-10 drop-shadow-sm" />
         )}
         {product.isNew && (

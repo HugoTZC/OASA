@@ -10,12 +10,12 @@ This document proposes refactoring the OASA backend from a complex PostgreSQL-ba
 
 ### 1.1 Why the Backend API Isn't Working
 
-The frontend is attempting to fetch products from an external backend service at `http://localhost:3001/api/products` (configurable via `NEXT_PUBLIC_BACKEND_URL`), but **this backend does not exist** in the current project. The product service in [`lib/products.ts`](lib/products.ts:3) expects:
+The frontend is attempting to fetch products from an external backend service at `http://localhost:5000/api/products` (configurable via `NEXT_PUBLIC_BACKEND_URL`), but **this backend does not exist** in the current project. The product service in [`lib/products.ts`](lib/products.ts:3) expects:
 
 ```
-GET http://localhost:3001/api/products
-GET http://localhost:3001/api/products/{id}
-GET http://localhost:3001/api/products/categories/all
+GET http://localhost:5000/api/products
+GET http://localhost:5000/api/products/{id}
+GET http://localhost:5000/api/products/categories/all
 ```
 
 However, there are no corresponding API routes in the Next.js app - only admin routes exist for:

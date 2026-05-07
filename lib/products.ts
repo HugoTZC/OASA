@@ -1,6 +1,6 @@
 import { Product, ProductsResponse, ProductCategory, ProductFilters } from '@/types/products';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001';
+const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL!;
 
 class ProductsService {
   private baseUrl: string;
@@ -66,9 +66,9 @@ class ProductsService {
     }
   }
 
-  async getCategories(): Promise<ProductCategory[]> {
+  async getCategories(): Promise<string[]> {
     try {
-      const response = await fetch(`${this.baseUrl}/categories/all`, {
+      const response = await fetch(`${API_BASE_URL}/api/categories`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -80,11 +80,11 @@ class ProductsService {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const categories = await response.json();
-      return categories;
+      const data = await response.json();
+      return data.categories || [];
     } catch (error) {
       console.error('Error fetching categories:', error);
-      throw new Error('Failed to fetch categories');
+      throw error;
     }
   }
 
@@ -102,7 +102,7 @@ class ProductsService {
   async getFeaturedProducts(limit: number = 8): Promise<Product[]> {
     try {
       const response = await this.getProducts({ limit });
-      return response.products.filter(product => product.isFeatured);
+      return response.products.filter(product => product.hierarchy === 1);
     } catch (error) {
       console.error('Error fetching featured products:', error);
       throw new Error('Failed to fetch featured products');

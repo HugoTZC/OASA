@@ -1,14 +1,13 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useSearchParams } from "next/navigation"
 import Link from "next/link"
-import { Search, Filter, Grid, List, Star, ShoppingCart, Heart, ChevronDown, X } from "lucide-react"
+import { Search, Filter, Grid, List, Star, ChevronDown, X } from "lucide-react"
 import { CategoryBreadcrumb } from "@/components/category-breadcrumb"
 import { ProductImage } from "@/components/dynamic-image"
 import { ImageSkeleton } from "@/components/image-skeleton"
 import { SiteLayout } from "@/components/site-layout"
-import { useShoppingFeatures } from "@/hooks/use-shopping-features"
+
 import { useProducts, useCategories } from "@/hooks/use-products"
 import { ProductFilters, Product } from "@/types/products"
 
@@ -16,30 +15,12 @@ interface FilterSidebarProps {
   categories: Array<{ name: string; slug: string }>
   selectedCategory: string
   setSelectedCategory: (category: string) => void
-  priceRange: number[]
-  setPriceRange: (range: number[]) => void
-  shouldShowPrices: boolean
-  showOnlyInStock: boolean
-  setShowOnlyInStock: (show: boolean) => void
-  showOnlyNew: boolean
-  setShowOnlyNew: (show: boolean) => void
-  showOnlySale: boolean
-  setShowOnlySale: (show: boolean) => void
 }
 
 function FilterSidebar({
   categories,
   selectedCategory,
   setSelectedCategory,
-  priceRange,
-  setPriceRange,
-  shouldShowPrices,
-  showOnlyInStock,
-  setShowOnlyInStock,
-  showOnlyNew,
-  setShowOnlyNew,
-  showOnlySale,
-  setShowOnlySale,
 }: FilterSidebarProps) {
   return (
     <div className="bg-white rounded-lg shadow-md p-6 sticky top-4">
@@ -88,41 +69,6 @@ function FilterSidebar({
           </div>
         </div>
       )} */}
-
-      {/* Additional Filters */}
-      <div className="mb-6">
-        <h4 className="font-semibold mb-3">Disponibilidad</h4>
-        <div className="space-y-2">
-          <label className="flex items-center">
-            <input
-              type="checkbox"
-              checked={showOnlyInStock}
-              onChange={(e) => setShowOnlyInStock(e.target.checked)}
-              className="mr-2"
-            />
-            <span className="text-sm">Solo en stock</span>
-          </label>
-          {/* New and Sale filters commented out per client request */}
-          {/* <label className="flex items-center">
-            <input
-              type="checkbox"
-              checked={showOnlyNew}
-              onChange={(e) => setShowOnlyNew(e.target.checked)}
-              className="mr-2"
-            />
-            <span className="text-sm">Productos nuevos</span>
-          </label>
-          <label className="flex items-center">
-            <input
-              type="checkbox"
-              checked={showOnlySale}
-              onChange={(e) => setShowOnlySale(e.target.checked)}
-              className="mr-2"
-            />
-            <span className="text-sm">En oferta</span>
-          </label> */}
-        </div>
-      </div>
     </div>
   )
 }
@@ -131,12 +77,9 @@ interface ProductCardProps {
   product: Product
   viewMode: "grid" | "list"
   index: number
-  shouldShowPrices: boolean
-  shouldShowAddToCart: boolean
 }
 
-function ProductCard({ product, viewMode, index, shouldShowPrices, shouldShowAddToCart }: ProductCardProps) {
-  const [isFavorite, setIsFavorite] = useState(false)
+function ProductCard({ product, viewMode, index }: ProductCardProps) {
 
   if (viewMode === "list") {
     return (
@@ -144,7 +87,7 @@ function ProductCard({ product, viewMode, index, shouldShowPrices, shouldShowAdd
         <div className="flex">
           <div className="w-48 h-48 relative flex-shrink-0">
             {/* Featured product star for list view */}
-            {product.isFeatured && (
+            {product.hierarchy === 1 && (
               <Star className="absolute top-2 right-2 w-5 h-5 text-yellow-500 fill-yellow-500 z-10 drop-shadow-sm" />
             )}
             <Link href={`/productos/${product.id}`}>
@@ -218,7 +161,7 @@ function ProductCard({ product, viewMode, index, shouldShowPrices, shouldShowAdd
       {/* Product Badges - commented out per client request */}
       <div className="relative">
         {/* Featured product star */}
-        {product.isFeatured && (
+        {product.hierarchy === 1 && (
           <Star className="absolute top-2 right-2 w-5 h-5 text-yellow-500 fill-yellow-500 z-10 drop-shadow-sm" />
         )}
         {/* {product.isNew && (
@@ -231,11 +174,11 @@ function ProductCard({ product, viewMode, index, shouldShowPrices, shouldShowAdd
             Oferta
           </span>
         )} */}
-        {!product.inStock && (
+        {/* {!product.inStock && (
           <span className="absolute top-2 left-2 bg-gray-500 text-white text-xs px-2 py-1 rounded-full z-10">
             Agotado
           </span>
-        )}
+        )} */}
         
         <Link href={`/productos/${product.id}`}>
           <ProductImage
@@ -297,23 +240,17 @@ function ProductCard({ product, viewMode, index, shouldShowPrices, shouldShowAdd
 }
 
 export default function ProductsPage() {
-  const searchParams = useSearchParams()
-  const categoryParam = searchParams.get("categoria")
+  const categoryParam = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get("categoria") : null
   
   const [selectedCategory, setSelectedCategory] = useState("Todos los Productos")
   const [searchQuery, setSearchQuery] = useState("")
   const [sortBy, setSortBy] = useState<'name' | 'price' | 'rating' | 'created_at'>('name')
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
-  const [priceRange, setPriceRange] = useState([0, 10000])
   const [showFilters, setShowFilters] = useState(false)
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
   const [currentPage, setCurrentPage] = useState(1)
-  const [showOnlyInStock, setShowOnlyInStock] = useState(false)
-  const [showOnlyNew, setShowOnlyNew] = useState(false)
-  const [showOnlySale, setShowOnlySale] = useState(false)
 
-  const { shouldShowPrices, shouldShowAddToCart } = useShoppingFeatures()
-  const { categories, loading: categoriesLoading } = useCategories()
+  const { categories } = useCategories()
 
   // Build filters for API
   const filters: ProductFilters = {
@@ -323,10 +260,6 @@ export default function ProductsPage() {
     sortOrder,
     ...(selectedCategory !== "Todos los Productos" && { category: selectedCategory }),
     ...(searchQuery && { search: searchQuery }),
-    ...(shouldShowPrices && { minPrice: priceRange[0], maxPrice: priceRange[1] }),
-    ...(showOnlyInStock && { inStock: true }),
-    ...(showOnlyNew && { isNew: true }),
-    ...(showOnlySale && { isSale: true }),
   }
 
   const { products, loading, error, pagination, refetch } = useProducts(filters)
@@ -334,7 +267,8 @@ export default function ProductsPage() {
   useEffect(() => {
     if (categoryParam && categories.length > 0) {
       const category = categories.find(cat => 
-        cat.slug === categoryParam || cat.name.toLowerCase() === categoryParam.toLowerCase()
+        cat.name.toLowerCase().replace(/\s+/g, '-') === categoryParam.toLowerCase() || 
+        cat.name.toLowerCase() === categoryParam.toLowerCase()
       )
       if (category) {
         setSelectedCategory(category.name)
@@ -345,11 +279,11 @@ export default function ProductsPage() {
   // Reset to first page when filters change
   useEffect(() => {
     setCurrentPage(1)
-  }, [selectedCategory, searchQuery, sortBy, sortOrder, priceRange, showOnlyInStock, showOnlyNew, showOnlySale])
+  }, [selectedCategory, searchQuery, sortBy, sortOrder])
 
   const categoriesData = [
     { name: "Todos los Productos", slug: "todos" },
-    ...categories.map(cat => ({ name: cat.name, slug: cat.slug }))
+    ...categories.map(cat => ({ name: cat.name, slug: cat.name.toLowerCase().replace(/\s+/g, '-') }))
   ]
 
   const handleSearch = (query: string) => {
@@ -417,15 +351,6 @@ export default function ProductsPage() {
                     categories={categoriesData}
                     selectedCategory={selectedCategory}
                     setSelectedCategory={setSelectedCategory}
-                    priceRange={priceRange}
-                    setPriceRange={setPriceRange}
-                    shouldShowPrices={shouldShowPrices}
-                    showOnlyInStock={showOnlyInStock}
-                    setShowOnlyInStock={setShowOnlyInStock}
-                    showOnlyNew={showOnlyNew}
-                    setShowOnlyNew={setShowOnlyNew}
-                    showOnlySale={showOnlySale}
-                    setShowOnlySale={setShowOnlySale}
                   />
                 </div>
               </div>
@@ -433,20 +358,11 @@ export default function ProductsPage() {
 
             {/* Desktop Sidebar */}
             <aside className="hidden lg:block lg:w-64 flex-shrink-0">
-              <FilterSidebar
-                categories={categoriesData}
-                selectedCategory={selectedCategory}
-                setSelectedCategory={setSelectedCategory}
-                priceRange={priceRange}
-                setPriceRange={setPriceRange}
-                shouldShowPrices={shouldShowPrices}
-                showOnlyInStock={showOnlyInStock}
-                setShowOnlyInStock={setShowOnlyInStock}
-                showOnlyNew={showOnlyNew}
-                setShowOnlyNew={setShowOnlyNew}
-                showOnlySale={showOnlySale}
-                setShowOnlySale={setShowOnlySale}
-              />
+<FilterSidebar
+                  categories={categoriesData}
+                  selectedCategory={selectedCategory}
+                  setSelectedCategory={setSelectedCategory}
+                />
             </aside>
 
             {/* Main Content */}
@@ -542,8 +458,6 @@ export default function ProductsPage() {
                       product={product} 
                       viewMode={viewMode} 
                       index={index}
-                      shouldShowPrices={shouldShowPrices}
-                      shouldShowAddToCart={shouldShowAddToCart}
                     />
                   ))}
                 </div>

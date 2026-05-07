@@ -86,14 +86,14 @@ export function useProduct(id: number): UseProductResult {
 }
 
 export interface UseCategoriesResult {
-  categories: ProductCategory[];
+  categories: Array<{name: string, productCount: number}>;
   loading: boolean;
   error: string | null;
   refetch: () => void;
 }
 
 export function useCategories(): UseCategoriesResult {
-  const [categories, setCategories] = useState<ProductCategory[]>([]);
+  const [categories, setCategories] = useState<Array<{name: string, productCount: number}>>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 

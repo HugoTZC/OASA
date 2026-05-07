@@ -4,8 +4,7 @@ export interface Product {
   description?: string;
   category: string;
   subcategory?: string;
-  price: number;
-  originalPrice?: number | null;
+  hierarchy: number;
   sku?: string;
   brand?: string;
   model?: string;

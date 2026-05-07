@@ -18,7 +18,7 @@ interface ShoppingContextType {
 
 const ShoppingContext = createContext<ShoppingContextType | undefined>(undefined)
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001'
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL!;
 
 export function ShoppingProvider({ children }: { children: React.ReactNode }) {
   const [settings, setSettings] = useState<ShoppingSettings>({

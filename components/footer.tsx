@@ -53,7 +53,7 @@ export function Footer() {
           </div> */}
 
           {/* PROMOCIONES Column */}
-          <div>
+          {/* <div>
             <h3 className="text-yellow-400 font-bold text-base sm:text-lg mb-3 sm:mb-4">PROMOCIONES</h3>
             <p className="text-xs sm:text-sm mb-3 sm:mb-4">
               Suscríbete a nuestro boletín y recibe promociones y precios especiales.
@@ -72,10 +72,10 @@ export function Footer() {
                 <Youtube className="w-4 h-4 sm:w-5 sm:h-5" />
               </Link>
             </div>
-          </div>
+          </div> */}
 
           {/* Contact Info */}
-          <div>
+          {/* <div>
             <h3 className="text-yellow-400 font-bold text-base sm:text-lg mb-3 sm:mb-4">CONTACTO</h3>
             <div className="text-xs sm:text-sm space-y-1 sm:space-y-2">
               <p>📞 800-123-4567</p>
@@ -83,6 +83,13 @@ export function Footer() {
               <p>✉️ info@oasamexico.com</p>
               <p>📍 Juarez, Chihuahua</p>
             </div>
+          </div> */}
+
+          {/* Contact Button */}
+          <div className="text-center">
+            <Link href="/atencion" className="inline-block bg-yellow-400 text-black px-6 py-3 rounded-md font-bold hover:bg-yellow-300 transition-colors">
+              Contáctanos
+            </Link>
           </div>
         </div>
 

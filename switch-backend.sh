@@ -18,9 +18,9 @@ NC='\033[0m' # No Color
 show_status() {
     echo -e "${BLUE}📊 Current Backend Configuration:${NC}"
     echo "=================================="
-    if grep -q "^NEXT_PUBLIC_BACKEND_URL=http://localhost:3001" "$ENV_FILE" 2>/dev/null; then
+     if grep -q "^NEXT_PUBLIC_BACKEND_URL=http://localhost:5000" "$ENV_FILE" 2>/dev/null; then
         echo -e "Environment: ${GREEN}LOCAL DEVELOPMENT${NC}"
-        echo -e "Backend URL: ${GREEN}http://localhost:3001${NC}"
+         echo -e "Backend URL: ${GREEN}http://localhost:5000${NC}"
     elif grep -q "^NEXT_PUBLIC_BACKEND_URL=https://oasa-backend.onrender.com" "$ENV_FILE" 2>/dev/null; then
         echo -e "Environment: ${YELLOW}PRODUCTION${NC}"
         echo -e "Backend URL: ${YELLOW}https://oasa-backend.onrender.com${NC}"
@@ -31,15 +31,15 @@ show_status() {
 }
 
 if [ "$1" = "local" ]; then
-    echo -e "${BLUE}🔄 Switching to LOCAL backend (localhost:3001)...${NC}"
+     echo -e "${BLUE}🔄 Switching to LOCAL backend (localhost:5000)...${NC}"
     
     # Switch to local
     sed -i 's/^NEXT_PUBLIC_BACKEND_URL=https:\/\/oasa-backend\.onrender\.com$/# NEXT_PUBLIC_BACKEND_URL=https:\/\/oasa-backend.onrender.com/' "$ENV_FILE"
-    sed -i 's/^# NEXT_PUBLIC_BACKEND_URL=http:\/\/localhost:3001$/NEXT_PUBLIC_BACKEND_URL=http:\/\/localhost:3001/' "$ENV_FILE"
+     sed -i 's/^# NEXT_PUBLIC_BACKEND_URL=http:\/\/localhost:5000$/NEXT_PUBLIC_BACKEND_URL=http:\/\/localhost:5000/' "$ENV_FILE"
     
     # If neither was found, add the local one
-    if ! grep -q "NEXT_PUBLIC_BACKEND_URL=http://localhost:3001" "$ENV_FILE"; then
-        echo "NEXT_PUBLIC_BACKEND_URL=http://localhost:3001" >> "$ENV_FILE"
+     if ! grep -q "NEXT_PUBLIC_BACKEND_URL=http://localhost:5000" "$ENV_FILE"; then
+         echo "NEXT_PUBLIC_BACKEND_URL=http://localhost:5000" >> "$ENV_FILE"
     fi
     
     echo -e "${GREEN}✅ Switched to LOCAL backend${NC}"
@@ -50,7 +50,7 @@ elif [ "$1" = "prod" ]; then
     echo -e "${BLUE}🔄 Switching to PRODUCTION backend (oasa-backend.onrender.com)...${NC}"
     
     # Switch to production
-    sed -i 's/^NEXT_PUBLIC_BACKEND_URL=http:\/\/localhost:3001$/# NEXT_PUBLIC_BACKEND_URL=http:\/\/localhost:3001/' "$ENV_FILE"
+     sed -i 's/^NEXT_PUBLIC_BACKEND_URL=http:\/\/localhost:5000$/# NEXT_PUBLIC_BACKEND_URL=http:\/\/localhost:5000/' "$ENV_FILE"
     sed -i 's/^# NEXT_PUBLIC_BACKEND_URL=https:\/\/oasa-backend\.onrender\.com$/NEXT_PUBLIC_BACKEND_URL=https:\/\/oasa-backend.onrender.com/' "$ENV_FILE"
     
     # If neither was found, add the production one
@@ -67,7 +67,7 @@ elif [ "$1" = "status" ]; then
     
 else
     echo -e "${YELLOW}Usage: $0 {local|prod|status}${NC}"
-    echo "  local  - Switch to localhost:3001"
+     echo "  local  - Switch to localhost:5000"
     echo "  prod   - Switch to oasa-backend.onrender.com"
     echo "  status - Show current configuration"
     echo ""

@@ -19,7 +19,7 @@ export function ProductsShowcase() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch("/api/admin/featured-products")
+      const response = await fetch("/api/products/featured")
       const data = await response.json()
       if (data.success) {
         setProducts(data.data)
@@ -83,7 +83,7 @@ export function ProductsShowcase() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product, index) => (
-            <Link key={product.id} href={product.href} className="group">
+            <Link key={product.id} href={`/productos/${product.id}`} className="group">
               <div className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-200">
                 <div className="aspect-square bg-gray-100 flex items-center justify-center overflow-hidden relative">
                   {/* Featured product star */}
