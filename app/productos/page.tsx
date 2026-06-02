@@ -276,6 +276,13 @@ export default function ProductsPage() {
     }
   }, [categoryParam, categories])
 
+  useEffect(() => {
+    const urlSearchParam = new URLSearchParams(window.location.search).get("search")
+    if (urlSearchParam !== null) {
+      setSearchQuery(urlSearchParam)
+    }
+  }, [])
+
   // Reset to first page when filters change
   useEffect(() => {
     setCurrentPage(1)
@@ -410,8 +417,8 @@ export default function ProductsPage() {
                       >
                         <option value="name-asc">Nombre A-Z</option>
                         <option value="name-desc">Nombre Z-A</option>
-                        <option value="price-asc">Precio: Menor a Mayor</option>
-                        <option value="price-desc">Precio: Mayor a Menor</option>
+                        {/* <option value="price-asc">Precio: Menor a Mayor</option>
+                        <option value="price-desc">Precio: Mayor a Menor</option> */}
                         {/* Rating sort option commented out per client request */}
                         {/* <option value="rating-desc">Mejor Calificación</option> */}
                         <option value="created_at-desc">Más Recientes</option>

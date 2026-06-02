@@ -33,12 +33,12 @@ export function NewsletterSection() {
             className="flex-1 px-4 py-3 rounded-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-400"
             required
           />
-          <button
+          {/* <button
             type="submit"
             className="bg-yellow-400 text-black px-6 py-3 rounded-md font-bold hover:bg-yellow-300 transition-colors"
           >
             Suscribirse
-          </button>
+          </button> */}
         </form>
       </div>
     </section>

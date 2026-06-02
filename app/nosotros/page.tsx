@@ -124,7 +124,7 @@ export default function NosotrosPage() {
         </section>
 
         {/* About Section */}
-        <section className="py-16 bg-white">
+        {/* <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <h1 className="text-3xl md:text-4xl font-bold text-blue-900 mb-8">Nosotros</h1>
@@ -151,7 +151,7 @@ export default function NosotrosPage() {
                     <li>• Servicio técnico especializado</li>
                   </ul>
                 </div>
-              </div>
+              </div> 
 
               <div className="mb-12">
                 <h2 className="text-2xl font-bold text-blue-900 mb-6">Nuestros Valores</h2>
@@ -189,7 +189,7 @@ export default function NosotrosPage() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Mission & Vision */}
         <section className="py-16 bg-white">
@@ -323,9 +323,9 @@ export default function NosotrosPage() {
               <button className="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors">
                 Ver Catálogo
               </button>
-              <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-blue-800 transition-colors">
+              {/* <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-blue-800 transition-colors">
                 Solicitar Cotización
-              </button>
+              </button> */}
             </div>
           </div>
         </section>

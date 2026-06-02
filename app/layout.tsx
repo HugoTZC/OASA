@@ -12,6 +12,9 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "OASA - La tienda de los expertos",
   description: "Gases industriales, herramientas y equipos de soldadura",
+  icons: {
+    icon: "/ico.png",
+  },
     generator: 'v0.dev'
 }
 

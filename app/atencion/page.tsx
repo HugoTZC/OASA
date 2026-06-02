@@ -154,7 +154,7 @@ export default function AtencionPage() {
                   Llamar Ahora
                 </a>
                 <a 
-                  href="https://wa.me/526865164283"
+                  href="https://wa.me/526561234567?text=Hola%20Tiendaoasa,%20tengo%20una%20consulta"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-green-800 transition-colors inline-block text-center"
@@ -167,7 +167,7 @@ export default function AtencionPage() {
         </section>
 
         {/* Contact Form Section */}
-        <section className="py-16 bg-white">
+        {/* <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-12">
@@ -266,7 +266,7 @@ export default function AtencionPage() {
                   />
                 </div>
 
-                {/* ALTCHA Captcha */}
+                {/* ALTCHA Captcha }
                 <div className="mb-6 flex justify-center">
                   <div className="bg-white p-4 rounded-lg border border-gray-200">
                     <Altcha />
@@ -303,7 +303,7 @@ export default function AtencionPage() {
               </form>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Contact Methods */}
         <section className="py-16 bg-gray-50">
@@ -383,7 +383,7 @@ export default function AtencionPage() {
                     </ul>
                   </div>
 
-                  <div className="mt-4 pt-4 border-t border-gray-200 flex gap-2">
+                  {/* <div className="mt-4 pt-4 border-t border-gray-200 flex gap-2">
                     <a 
                       href={`tel:${rep.phone.replace(/[^0-9]/g, '')}`}
                       className="flex-1 bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors text-sm text-center"
@@ -396,7 +396,7 @@ export default function AtencionPage() {
                     >
                       Email
                     </a>
-                  </div>
+                  </div> */}
                 </div>
               ))}
             </div>
@@ -433,7 +433,7 @@ export default function AtencionPage() {
         </section>
 
         {/* Emergency Contact */}
-        <section className="py-16 bg-red-800 text-white">
+        {/* <section className="py-16 bg-red-800 text-white">
           <div className="container mx-auto px-4 text-center">
             <Headphones className="w-16 h-16 mx-auto mb-6" />
             <h2 className="text-4xl font-bold mb-6">Soporte de Emergencia</h2>
@@ -462,7 +462,7 @@ export default function AtencionPage() {
             </div>
             <p className="text-red-200 mt-2">Disponible 24 horas, 7 días a la semana</p>
           </div>
-        </section>
+        </section> */}
       </main>
     </SiteLayout>
   )

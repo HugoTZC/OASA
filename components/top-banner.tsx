@@ -23,11 +23,11 @@ export function TopBanner() {
         <span className="text-center sm:text-left mb-1 sm:mb-0 px-1 leading-tight">
           {bannerSlogan}. contáctanos al: {bannerContact}
         </span>
-        <button className="flex items-center gap-1 sm:gap-2 hover:underline text-xs sm:text-sm">
+        {/* <button className="flex items-center gap-1 sm:gap-2 hover:underline text-xs sm:text-sm">
           <Mail className="w-3 h-3 sm:w-4 sm:h-4" />
           <span className="hidden sm:inline">Suscríbete</span>
           <span className="sm:hidden">Email</span>
-        </button>
+        </button> */}
         <button onClick={() => setIsVisible(false)} className="absolute top-0.5 right-1 sm:hidden">
           <X className="w-3 h-3" />
         </button>

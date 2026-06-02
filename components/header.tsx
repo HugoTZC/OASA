@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import Image from "next/image"
 import { Search, User, ShoppingCart, Menu, X, LogOut } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
@@ -17,7 +18,7 @@ export function Header() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
     if (searchQuery.trim()) {
-      window.location.href = `/search?q=${encodeURIComponent(searchQuery)}`
+      window.location.href = `/productos?search=${encodeURIComponent(searchQuery.trim())}`
     }
   }
 
@@ -33,8 +34,8 @@ export function Header() {
         <div className="flex items-center justify-between py-2 sm:py-3 md:py-4 min-w-0">
           {/* Logo */}
           <Link href="/" className="flex items-center flex-shrink-0 min-w-0">
-            <div className="w-16 h-6 sm:w-20 sm:h-8 md:w-32 md:h-12 bg-blue-800 rounded flex items-center justify-center flex-shrink-0">
-              <span className="text-white font-bold text-xs sm:text-sm md:text-xl">OASA</span>
+            <div className="w-16 h-6 sm:w-20 sm:h-8 md:w-32 md:h-12 flex items-center justify-center flex-shrink-0">
+              <Image src="/logo.png" alt="OASA Logo" width={128} height={48} className="object-contain" />
             </div>
             <div className="ml-1 sm:ml-2 hidden sm:block min-w-0">
               <div className="text-xs text-gray-600 truncate">La tienda de los expertos.</div>
@@ -210,11 +211,11 @@ export function Header() {
                   Servicios Industriales
                 </Link>
               </li> */}
-              <li>
+              {/* <li>
                 <Link href="/sucursales" className="text-gray-700 hover:text-blue-800 whitespace-nowrap">
                   Sucursales
                 </Link>
-              </li>
+              </li> */}
               {/* <li>
                 <Link href="/blog" className="text-gray-700 hover:text-blue-800 whitespace-nowrap">
                   Blog
