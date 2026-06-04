@@ -21,9 +21,9 @@ export interface Product {
   metadata?: any;
   images: ProductImage[];
   inStock: boolean;
-  image: string; // Primary image URL for backwards compatibility
-  reviews: number; // Alias for reviewCount
-  isSale: boolean; // Alias for isOnSale
+  imagepath?: string | null;
+  reviews: number;
+  isSale: boolean;
   createdAt: string;
   updatedAt: string;
 }

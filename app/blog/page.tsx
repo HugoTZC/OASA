@@ -156,13 +156,10 @@ export default function BlogPage() {
                 <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
                   <div className="aspect-video bg-gray-200 flex items-center justify-center overflow-hidden">
                     <RandomImage
-                      seed={`blog-featured-${featuredPost.id}`}
                       width={800}
                       height={400}
                       alt={featuredPost.title}
                       className="object-cover w-full h-full hover:scale-105 transition-transform duration-300"
-                      priority
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
                     />
                   </div>
                   <div className="p-6 md:p-8">
@@ -224,13 +221,10 @@ export default function BlogPage() {
                 >
                   <div className="aspect-video bg-gray-200 flex items-center justify-center overflow-hidden">
                     <RandomImage
-                      seed={`blog-post-${post.id}`}
                       width={400}
                       height={300}
                       alt={post.title}
                       className="object-cover w-full h-full hover:scale-105 transition-transform duration-300"
-                      priority={index < 4}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   </div>
                   <div className="p-4 md:p-6">
@@ -304,12 +298,10 @@ export default function BlogPage() {
                     <div className="flex gap-3">
                       <div className="w-16 h-16 bg-gray-200 rounded-lg flex-shrink-0 flex items-center justify-center overflow-hidden">
                         <RandomImage
-                          seed={`blog-sidebar-${post.id}`}
                           width={64}
                           height={64}
                           alt={post.title}
                           className="object-cover w-full h-full"
-                          sizes="64px"
                         />
                       </div>
                       <div className="flex-1">

@@ -81,14 +81,13 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
              {/* Product Images */}
              <div>
-              <div className="aspect-square bg-gray-100 rounded-lg mb-4 flex items-center justify-center">
+              <div className="aspect-square bg-gray-100 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
                 <ProductImage
-                  productId={product.id}
+                  src={product.imagepath ? `http://localhost:5000${product.imagepath}` : '/placeholder.svg'}
                   width={400}
                   height={400}
                   alt={product.name}
-                  className="object-contain"
-                  fallback="/placeholder.svg"
+                  className="object-cover w-full h-full"
                 />
               </div>
              </div>

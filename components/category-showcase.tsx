@@ -5,31 +5,47 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { CategoryImage } from "./dynamic-image"
 
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000'
+
+interface CategoryWithImage {
+  id: string
+  name: string
+  description: string
+  productCount: string
+  href: string
+  imageUrl: string | null
+}
+
 export function CategoryShowcase() {
-  const [categories, setCategories] = useState<Array<{id: string, name: string, description: string, productCount: string, href: string}>>([])
+  const [categories, setCategories] = useState<CategoryWithImage[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetchCategories()
+    fetchCategoriesWithImages()
   }, [])
 
-  const fetchCategories = async () => {
+  const fetchCategoriesWithImages = async () => {
     try {
-      const response = await fetch("/api/categories")
+      const response = await fetch(`${BACKEND_URL}/api/categories`)
       const data = await response.json()
       if (data.success && Array.isArray(data.categories)) {
-        const mappedData = data.categories.slice(0, 3).map((cat: { name: string, productCount: number }) => ({
-          id: cat.name,
-          name: cat.name,
-          description: "",
-          productCount: `${cat.productCount} productos`,
-          href: `/productos?categoria=${encodeURIComponent(cat.name)}`,
-        }))
-        setCategories(mappedData)
+        const categoriesWithImages = await Promise.all(
+          data.categories.slice(0, 3).map(async (cat: { name: string; productCount: number }) => {
+            const imageUrl = await fetchFirstProductImage(cat.name)
+            return {
+              id: cat.name,
+              name: cat.name,
+              description: "",
+              productCount: `${cat.productCount} productos`,
+              href: `/productos?categoria=${encodeURIComponent(cat.name)}`,
+              imageUrl,
+            }
+          })
+        )
+        setCategories(categoriesWithImages)
       }
     } catch (error) {
       console.error("Failed to fetch categories:", error)
-      // Fallback to static data if API fails
       setCategories([
         {
           id: "1",
@@ -37,6 +53,7 @@ export function CategoryShowcase() {
           description: "Oxígeno, argón, acetileno y más gases para uso industrial",
           productCount: "45 productos",
           href: "/productos?categoria=Gases Industriales",
+          imageUrl: null,
         },
         {
           id: "2",
@@ -44,6 +61,7 @@ export function CategoryShowcase() {
           description: "Soldadoras, electrodos y accesorios profesionales",
           productCount: "32 productos",
           href: "/productos?categoria=Equipos de Soldadura",
+          imageUrl: null,
         },
         {
           id: "3",
@@ -51,6 +69,7 @@ export function CategoryShowcase() {
           description: "Herramientas manuales y eléctricas de calidad",
           productCount: "28 productos",
           href: "/productos?categoria=Herramientas",
+          imageUrl: null,
         },
         {
           id: "4",
@@ -58,6 +77,7 @@ export function CategoryShowcase() {
           description: "Equipo de protección personal para industriales",
           productCount: "15 productos",
           href: "/productos?categoria=Protección Industrial",
+          imageUrl: null,
         },
         {
           id: "5",
@@ -65,10 +85,27 @@ export function CategoryShowcase() {
           description: "Accesorios y complementos para diversas aplicaciones",
           productCount: "12 productos",
           href: "/productos?categoria=Accesorios",
+          imageUrl: null,
         },
       ])
     } finally {
       setLoading(false)
+    }
+  }
+
+  const fetchFirstProductImage = async (categoryName: string): Promise<string | null> => {
+    try {
+      const response = await fetch(
+        `${BACKEND_URL}/api/products?category=${encodeURIComponent(categoryName)}&limit=1`
+      )
+      const data = await response.json()
+      if (data.products && data.products.length > 0 && data.products[0].imagepath) {
+        return `${BACKEND_URL}${data.products[0].imagepath}`
+      }
+      return null
+    } catch (error) {
+      console.error(`Failed to fetch first product for category ${categoryName}:`, error)
+      return null
     }
   }
 
@@ -102,7 +139,7 @@ export function CategoryShowcase() {
   }
 
   if (categories.length === 0) {
-    return null // Don't render section if no categories
+    return null
   }
 
   return (
@@ -118,14 +155,20 @@ export function CategoryShowcase() {
             <Link key={category.id} href={category.href} className="group">
               <div className="bg-gray-50 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
                 <div className="aspect-video bg-gray-200 flex items-center justify-center overflow-hidden">
-                  <CategoryImage
-                    category={category.name.toLowerCase().replace(/\s+/g, '-')}
-                    width={300}
-                    height={200}
-                    alt={category.name}
-                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
+                  {category.imageUrl ? (
+                    <CategoryImage
+                      src={category.imageUrl}
+                      fallback="/placeholder.svg"
+                      width={400}
+                      height={200}
+                      alt={category.name}
+                      className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                    />
+                  ) : (
+                    <div className="flex items-center justify-center w-full h-full bg-gray-100">
+                      <span className="text-gray-400 text-sm">Sin imagen</span>
+                    </div>
+                  )}
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-2 group-hover:text-blue-800 transition-colors">

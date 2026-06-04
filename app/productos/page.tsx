@@ -92,12 +92,11 @@ function ProductCard({ product, viewMode, index }: ProductCardProps) {
             )}
             <Link href={`/productos/${product.id}`}>
               <ProductImage
-                productId={product.id}
+                src={product.imagepath ? `http://localhost:5000${product.imagepath}` : '/placeholder.svg'}
                 width={200}
                 height={200}
                 alt={product.name}
-                className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-200"
-                priority={index < 4}
+                className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-200"
               />
             </Link>
           </div>
@@ -181,15 +180,13 @@ function ProductCard({ product, viewMode, index }: ProductCardProps) {
         )} */}
         
         <Link href={`/productos/${product.id}`}>
-          <ProductImage
-            productId={product.id}
-            width={300}
-            height={300}
-            alt={product.name}
-            className="object-contain group-hover:scale-105 transition-transform duration-200 aspect-square"
-            priority={index < 8}
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-          />
+            <ProductImage
+              src={product.imagepath ? `http://localhost:5000${product.imagepath}` : '/placeholder.svg'}
+              width={300}
+              height={300}
+              alt={product.name}
+              className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-200"
+            />
         </Link>
       </div>
       

@@ -89,13 +89,11 @@ export function ProductsShowcase() {
                   {/* Featured product star */}
                   <Star className="absolute top-2 right-2 w-5 h-5 text-yellow-500 fill-yellow-500 z-10 drop-shadow-sm" />
                   <ProductImage
-                    productId={product.id}
+                    src={product.imagepath ? `http://localhost:5000${product.imagepath}` : '/placeholder.svg'}
                     width={200}
                     height={200}
                     alt={product.name}
-                    className="object-contain group-hover:scale-105 transition-transform duration-200"
-                    priority={index < 2}
-                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
+                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-200"
                   />
                 </div>
                 <div className="p-4">
