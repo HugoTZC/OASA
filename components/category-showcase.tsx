@@ -5,7 +5,7 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { CategoryImage } from "./dynamic-image"
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000'
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, '') || 'http://localhost:5000'
 
 interface CategoryWithImage {
   id: string
@@ -27,6 +27,9 @@ export function CategoryShowcase() {
   const fetchCategoriesWithImages = async () => {
     try {
       const response = await fetch(`${BACKEND_URL}/api/categories`)
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
       const data = await response.json()
       if (data.success && Array.isArray(data.categories)) {
         const categoriesWithImages = await Promise.all(
@@ -98,9 +101,13 @@ export function CategoryShowcase() {
       const response = await fetch(
         `${BACKEND_URL}/api/products?category=${encodeURIComponent(categoryName)}&limit=1`
       )
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
       const data = await response.json()
       if (data.products && data.products.length > 0 && data.products[0].imagepath) {
-        return `${BACKEND_URL}${data.products[0].imagepath}`
+        const imgPath = data.products[0].imagepath
+        return imgPath.startsWith('http') ? imgPath : `${BACKEND_URL}${imgPath}`
       }
       return null
     } catch (error) {

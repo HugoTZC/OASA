@@ -3,7 +3,7 @@
  * Frontend service to consume the backend images API
  */
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL!;
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, '') || 'http://localhost:5000';
 
 export interface ImageData {
   id: string | number

@@ -1,5 +1,7 @@
 "use client"
 
+export const dynamic = 'force-dynamic'
+
 import { use } from "react"
 import { useState, useEffect } from "react"
 import { Star, ShoppingCart, Heart, ArrowLeft, Home, ChevronRight } from "lucide-react"
@@ -83,7 +85,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
              <div>
               <div className="aspect-square bg-gray-100 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
                 <ProductImage
-                  src={product.imagepath ? `http://localhost:5000${product.imagepath}` : '/placeholder.svg'}
+                  src={product.imagepath ? `${process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, '')}${product.imagepath}` : '/placeholder.svg'}
                   width={400}
                   height={400}
                   alt={product.name}

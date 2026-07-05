@@ -92,7 +92,7 @@ function ProductCard({ product, viewMode, index }: ProductCardProps) {
             )}
             <Link href={`/productos/${product.id}`}>
               <ProductImage
-                src={product.imagepath ? `http://localhost:5000${product.imagepath}` : '/placeholder.svg'}
+                src={product.imagepath ? `${process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, '')}${product.imagepath}` : '/placeholder.svg'}
                 width={200}
                 height={200}
                 alt={product.name}
@@ -181,7 +181,7 @@ function ProductCard({ product, viewMode, index }: ProductCardProps) {
         
         <Link href={`/productos/${product.id}`}>
             <ProductImage
-              src={product.imagepath ? `http://localhost:5000${product.imagepath}` : '/placeholder.svg'}
+              src={product.imagepath ? `${process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, '')}${product.imagepath}` : '/placeholder.svg'}
               width={300}
               height={300}
               alt={product.name}

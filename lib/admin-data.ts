@@ -211,3 +211,22 @@ export const updateTimestamp = (item: any) => ({
   ...item,
   updatedAt: new Date().toISOString(),
 })
+
+// Featured Products CRUD
+export const getFeaturedProductById = (id: string) => {
+  return featuredProducts.find((p) => p.id === id) || null
+}
+
+export const updateFeaturedProduct = (id: string, data: Partial<FeaturedProduct>) => {
+  const index = featuredProducts.findIndex((p) => p.id === id)
+  if (index === -1) return null
+  featuredProducts[index] = { ...featuredProducts[index], ...data, updatedAt: new Date().toISOString() }
+  return featuredProducts[index]
+}
+
+export const deleteFeaturedProduct = (id: string) => {
+  const index = featuredProducts.findIndex((p) => p.id === id)
+  if (index === -1) return false
+  featuredProducts.splice(index, 1)
+  return true
+}

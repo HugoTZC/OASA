@@ -1,6 +1,6 @@
 import { Product, ProductsResponse, ProductCategory, ProductFilters } from '@/types/products';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL!;
+const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, '') || 'http://localhost:5000';
 
 class ProductsService {
   private baseUrl: string;
