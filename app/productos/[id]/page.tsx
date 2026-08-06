@@ -2,10 +2,6 @@
 
 export const dynamic = 'force-dynamic'
 
-export function generateStaticParams() {
-  return []
-}
-
 import { use } from "react"
 import { useState, useEffect } from "react"
 import { Star, ShoppingCart, Heart, ArrowLeft, Home, ChevronRight } from "lucide-react"
