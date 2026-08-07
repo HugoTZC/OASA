@@ -6,7 +6,22 @@ import { Star } from "lucide-react"
 import { ProductImage } from "./dynamic-image"
 import { ImageSkeleton } from "./image-skeleton"
 import { useShoppingFeatures } from "@/hooks/use-shopping-features"
-import type { FeaturedProduct } from "@/types/admin"
+
+interface FeaturedProduct {
+  id: string
+  name: string
+  category: string
+  price: number
+  originalPrice?: number
+  image: string
+  href: string
+  order: number
+  isActive: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, '') || 'http://localhost:5000'
 
 export function ProductsShowcase() {
   const [products, setProducts] = useState<FeaturedProduct[]>([])
@@ -19,28 +34,13 @@ export function ProductsShowcase() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch("/api/products/featured")
+      const response = await fetch(`${BACKEND_URL}/api/admin/featured-products`)
       const data = await response.json()
-      if (data.success) {
+      if (data.success && data.data) {
         setProducts(data.data)
       }
     } catch (error) {
-      console.error("Failed to fetch products:", error)
-      // Fallback to static data if API fails
-      setProducts([
-        {
-          id: "1",
-          name: "Tanque de Oxígeno",
-          category: "Gases",
-          price: 1250.0,
-          image: "/placeholder.svg?height=200&width=200",
-          href: "/productos/tanque-oxigeno",
-          order: 1,
-          isActive: true,
-          createdAt: "",
-          updatedAt: "",
-        },
-      ])
+      console.error("Failed to fetch featured products:", error)
     } finally {
       setLoading(false)
     }
@@ -71,6 +71,10 @@ export function ProductsShowcase() {
     )
   }
 
+  if (products.length === 0) {
+    return null
+  }
+
   return (
     <section className="py-8 md:py-16 bg-white">
       <div className="container mx-auto px-4">
@@ -82,14 +86,13 @@ export function ProductsShowcase() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.map((product, index) => (
+          {products.map((product) => (
             <Link key={product.id} href={`/productos/${product.id}`} className="group">
               <div className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-200">
                 <div className="aspect-square bg-white flex items-center justify-center overflow-hidden relative">
-                  {/* Featured product star */}
                   <Star className="absolute top-2 right-2 w-5 h-5 text-yellow-500 fill-yellow-500 z-10 drop-shadow-sm" />
                   <ProductImage
-                    src={product.imagepath}
+                    src={product.image}
                     width={200}
                     height={200}
                     alt={product.name}
@@ -101,17 +104,6 @@ export function ProductsShowcase() {
                   <h3 className="font-semibold text-gray-900 mt-1 group-hover:text-blue-800 line-clamp-2">
                     {product.name}
                   </h3>
-                  {/* Price section commented out per client request */}
-                  {/* {shouldShowPrices && (
-                    <div className="mt-2">
-                      <span className="text-lg font-bold text-gray-900">${product.price.toLocaleString()}</span>
-                      {product.originalPrice && (
-                        <span className="ml-2 text-sm text-gray-500 line-through">
-                          ${product.originalPrice.toLocaleString()}
-                        </span>
-                      )}
-                    </div>
-                  )} */}
                 </div>
               </div>
             </Link>
