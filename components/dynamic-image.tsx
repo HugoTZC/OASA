@@ -4,6 +4,42 @@ import { useState } from "react"
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, '') || 'http://localhost:5000';
 
+function isAbsoluteUrl(str: string): boolean {
+  return str.startsWith('http://') || str.startsWith('https://') || str.startsWith('//')
+}
+
+function fixMalformedUrl(url: string): string {
+  const httpsDoubleSlash = url.indexOf('https//')
+  if (httpsDoubleSlash !== -1) {
+    return 'https://' + url.substring(httpsDoubleSlash + 6)
+  }
+  const httpDoubleSlash = url.indexOf('http//')
+  if (httpDoubleSlash !== -1) {
+    return 'http://' + url.substring(httpDoubleSlash + 5)
+  }
+  return url
+}
+
+function resolveImageSrc(imagePath: string | undefined, backendUrl: string): string {
+  if (!imagePath) return '/placeholder.svg'
+
+  let resolved = imagePath
+
+  if (isAbsoluteUrl(resolved)) {
+    if (resolved.startsWith('//')) {
+      return `https:${resolved}`
+    }
+    resolved = fixMalformedUrl(resolved)
+    return resolved
+  }
+
+  if (resolved.startsWith('/')) {
+    return `${backendUrl}${resolved}`
+  }
+
+  return `${backendUrl}/${resolved}`
+}
+
 interface DynamicImageProps {
   src?: string
   fallback?: string
@@ -27,7 +63,7 @@ export function DynamicImage({
     setUseFallback(true)
   }
 
-  const imageSrc = useFallback ? fallback : src || fallback
+  const imageSrc = useFallback ? fallback : resolveImageSrc(src, BACKEND_URL)
 
   const getOptimizedSrc = (originalSrc: string) => {
     if (originalSrc.startsWith('/images/')) {
