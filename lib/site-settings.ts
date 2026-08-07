@@ -13,15 +13,19 @@ export interface SiteSettingsResponse {
 
 class SiteSettingsService {
   /**
-   * Get all site settings
+   * Get all site settings (shopping settings from API)
    */
   async getSiteSettings(): Promise<SiteSettingsResponse> {
     try {
-      const response = await fetch(`${BACKEND_URL}/api/settings/site`)
+      const response = await fetch(`${BACKEND_URL}/api/settings/shopping`)
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
-      return await response.json()
+      const data = await response.json()
+      return {
+        success: true,
+        settings: data
+      }
     } catch (error) {
       console.error('Error fetching site settings:', error)
       return {
@@ -36,7 +40,7 @@ class SiteSettingsService {
    */
   async updateSiteSettings(settings: any): Promise<SiteSettingsResponse> {
     try {
-      const response = await fetch(`${BACKEND_URL}/api/settings/site`, {
+      const response = await fetch(`${BACKEND_URL}/api/settings/shopping`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -77,12 +81,12 @@ class SiteSettingsService {
    */
   async updateSetting(key: string, value: any): Promise<SiteSettingsResponse> {
     try {
-      const response = await fetch(`${BACKEND_URL}/api/settings/site/${key}`, {
+      const response = await fetch(`${BACKEND_URL}/api/settings/shopping`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ value }),
+        body: JSON.stringify({ [key]: value }),
       })
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)

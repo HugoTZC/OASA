@@ -5,28 +5,21 @@ import Link from "next/link"
 import { Star } from "lucide-react"
 import { ProductImage } from "./dynamic-image"
 import { ImageSkeleton } from "./image-skeleton"
-import { useShoppingFeatures } from "@/hooks/use-shopping-features"
-
-interface FeaturedProduct {
-  id: string
-  name: string
-  category: string
-  price: number
-  originalPrice?: number
-  image: string
-  href: string
-  order: number
-  isActive: boolean
-  createdAt: string
-  updatedAt: string
-}
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, '') || 'http://localhost:5000'
 
+interface Product {
+  id: number
+  name: string
+  category: string
+  imagepath: string
+  isFeatured: boolean
+  hierarchy: number
+}
+
 export function ProductsShowcase() {
-  const [products, setProducts] = useState<FeaturedProduct[]>([])
+  const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
-  const { shouldShowPrices } = useShoppingFeatures()
 
   useEffect(() => {
     fetchProducts()
@@ -34,10 +27,11 @@ export function ProductsShowcase() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch(`${BACKEND_URL}/api/admin/featured-products`)
+      const response = await fetch(`${BACKEND_URL}/api/products?limit=8`)
       const data = await response.json()
-      if (data.success && data.data) {
-        setProducts(data.data)
+      if (data.products) {
+        const featured = data.products.filter((p: Product) => p.isFeatured === true).slice(0, 4)
+        setProducts(featured)
       }
     } catch (error) {
       console.error("Failed to fetch featured products:", error)
@@ -92,7 +86,7 @@ export function ProductsShowcase() {
                 <div className="aspect-square bg-white flex items-center justify-center overflow-hidden relative">
                   <Star className="absolute top-2 right-2 w-5 h-5 text-yellow-500 fill-yellow-500 z-10 drop-shadow-sm" />
                   <ProductImage
-                    src={product.image}
+                    src={product.imagepath}
                     width={200}
                     height={200}
                     alt={product.name}
