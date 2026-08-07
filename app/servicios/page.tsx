@@ -128,13 +128,13 @@ export default function ServiciosPage() {
                     </button>
                   </div>
                   <div className="flex-1">
-                    <div className="aspect-video bg-gray-200 rounded-lg flex items-center justify-center">
+                    <div className="aspect-video bg-white rounded-lg flex items-center justify-center">
                       <Image
                         src={service.image || "/placeholder.svg"}
                         alt={service.title}
                         width={400}
                         height={300}
-                        className="object-cover rounded-lg"
+                        className="object-contain rounded-lg"
                       />
                     </div>
                   </div>

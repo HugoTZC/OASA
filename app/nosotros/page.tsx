@@ -291,13 +291,13 @@ export default function NosotrosPage() {
                   key={index}
                   className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
                 >
-                  <div className="aspect-square bg-gray-200 flex items-center justify-center">
+                  <div className="aspect-square bg-white flex items-center justify-center">
                     <Image
                       src={member.image || "/placeholder.svg"}
                       alt={member.name}
                       width={300}
                       height={300}
-                      className="object-cover w-full h-full"
+                      className="object-contain w-full h-full"
                     />
                   </div>
                   <div className="p-6">

@@ -161,7 +161,7 @@ export function CategoryShowcase() {
           {categories.map((category) => (
             <Link key={category.id} href={category.href} className="group">
               <div className="bg-gray-50 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                <div className="aspect-video bg-gray-200 flex items-center justify-center overflow-hidden">
+                <div className="aspect-video bg-white flex items-center justify-center overflow-hidden">
                   {category.imageUrl ? (
                     <CategoryImage
                       src={category.imageUrl}
@@ -169,7 +169,7 @@ export function CategoryShowcase() {
                       width={400}
                       height={200}
                       alt={category.name}
-                      className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                      className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-300"
                     />
                   ) : (
                     <div className="flex items-center justify-center w-full h-full bg-gray-100">

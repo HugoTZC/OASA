@@ -154,12 +154,12 @@ export default function BlogPage() {
               <div className="mb-8 md:mb-12">
                 <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-gray-900">Artículo Destacado</h2>
                 <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                  <div className="aspect-video bg-gray-200 flex items-center justify-center overflow-hidden">
+                  <div className="aspect-video bg-white flex items-center justify-center overflow-hidden">
                     <RandomImage
                       width={800}
                       height={400}
                       alt={featuredPost.title}
-                      className="object-cover w-full h-full hover:scale-105 transition-transform duration-300"
+                      className="object-contain w-full h-full hover:scale-105 transition-transform duration-300"
                     />
                   </div>
                   <div className="p-6 md:p-8">
@@ -219,12 +219,12 @@ export default function BlogPage() {
                   key={post.id}
                   className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
                 >
-                  <div className="aspect-video bg-gray-200 flex items-center justify-center overflow-hidden">
+                  <div className="aspect-video bg-white flex items-center justify-center overflow-hidden">
                     <RandomImage
                       width={400}
                       height={300}
                       alt={post.title}
-                      className="object-cover w-full h-full hover:scale-105 transition-transform duration-300"
+                      className="object-contain w-full h-full hover:scale-105 transition-transform duration-300"
                     />
                   </div>
                   <div className="p-4 md:p-6">
@@ -296,12 +296,12 @@ export default function BlogPage() {
                 {blogPosts.slice(0, 4).map((post, index) => (
                   <Link key={post.id} href={`/blog/${post.id}`} className="block group">
                     <div className="flex gap-3">
-                      <div className="w-16 h-16 bg-gray-200 rounded-lg flex-shrink-0 flex items-center justify-center overflow-hidden">
+                      <div className="w-16 h-16 bg-white rounded-lg flex-shrink-0 flex items-center justify-center overflow-hidden">
                         <RandomImage
                           width={64}
                           height={64}
                           alt={post.title}
-                          className="object-cover w-full h-full"
+                          className="object-contain w-full h-full"
                         />
                       </div>
                       <div className="flex-1">

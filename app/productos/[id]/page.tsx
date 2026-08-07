@@ -59,7 +59,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
         {loading ? (
           <div className="animate-pulse">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              <div className="aspect-square bg-gray-200 rounded-lg"></div>
+              <div className="aspect-square bg-white rounded-lg"></div>
               <div className="space-y-4">
                 <div className="h-8 bg-gray-200 rounded w-3/4"></div>
                 <div className="h-10 bg-gray-200 rounded w-1/2"></div>
@@ -83,13 +83,13 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
              {/* Product Images */}
              <div>
-              <div className="aspect-square bg-gray-100 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+              <div className="aspect-square bg-white rounded-lg mb-4 flex items-center justify-center overflow-hidden">
                 <ProductImage
                   src={product.imagepath}
                   width={400}
                   height={400}
                   alt={product.name}
-                  className="object-cover w-full h-full"
+                  className="object-contain w-full h-full"
                 />
               </div>
              </div>

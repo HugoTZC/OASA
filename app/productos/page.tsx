@@ -88,7 +88,7 @@ function ProductCard({ product, viewMode, index }: ProductCardProps) {
     return (
       <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group">
         <div className="flex">
-          <div className="w-48 h-48 relative flex-shrink-0 bg-gray-100">
+          <div className="w-48 h-48 relative flex-shrink-0 bg-white">
             {/* Featured product star for list view */}
             {product.hierarchy === 1 && (
               <Star className="absolute top-2 right-2 w-5 h-5 text-yellow-500 fill-yellow-500 z-10 drop-shadow-sm" />
@@ -183,7 +183,7 @@ function ProductCard({ product, viewMode, index }: ProductCardProps) {
         )} */}
         
         <Link href={`/productos/${product.id}`}>
-            <div className="aspect-square bg-gray-100 flex items-center justify-center overflow-hidden">
+            <div className="aspect-square bg-white flex items-center justify-center overflow-hidden">
               <ProductImage
                 src={product.imagepath}
                 width={300}

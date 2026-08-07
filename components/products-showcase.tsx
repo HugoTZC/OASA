@@ -85,15 +85,15 @@ export function ProductsShowcase() {
           {products.map((product, index) => (
             <Link key={product.id} href={`/productos/${product.id}`} className="group">
               <div className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-200">
-                <div className="aspect-square bg-gray-100 flex items-center justify-center overflow-hidden relative">
+                <div className="aspect-square bg-white flex items-center justify-center overflow-hidden relative">
                   {/* Featured product star */}
                   <Star className="absolute top-2 right-2 w-5 h-5 text-yellow-500 fill-yellow-500 z-10 drop-shadow-sm" />
                   <ProductImage
-                    src={product.imagepath ? `http://localhost:5000${product.imagepath}` : '/placeholder.svg'}
+                    src={product.imagepath}
                     width={200}
                     height={200}
                     alt={product.name}
-                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-200"
+                    className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-200"
                   />
                 </div>
                 <div className="p-4">
