@@ -1,7 +1,8 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
+import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import { Search, Filter, Grid, List, Star, ChevronDown, X } from "lucide-react"
 import { CategoryBreadcrumb } from "@/components/category-breadcrumb"
 import { ProductImage } from "@/components/dynamic-image"
@@ -15,12 +16,14 @@ interface FilterSidebarProps {
   categories: Array<{ name: string; slug: string }>
   selectedCategory: string
   setSelectedCategory: (category: string) => void
+  onCategoryChange: (category: string) => void
 }
 
 function FilterSidebar({
   categories,
   selectedCategory,
   setSelectedCategory,
+  onCategoryChange,
 }: FilterSidebarProps) {
   return (
     <div className="bg-white rounded-lg shadow-md p-6 sticky top-4">
@@ -33,7 +36,7 @@ function FilterSidebar({
           {categories.map((category) => (
             <button
               key={category.name}
-              onClick={() => setSelectedCategory(category.name)}
+              onClick={() => onCategoryChange(category.name)}
               className={`block w-full text-left px-3 py-2 rounded-md transition-colors text-sm ${
                 selectedCategory === category.name ? "bg-blue-800 text-white" : "hover:bg-gray-100"
               }`}
@@ -85,7 +88,7 @@ function ProductCard({ product, viewMode, index }: ProductCardProps) {
     return (
       <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group">
         <div className="flex">
-          <div className="w-48 h-48 relative flex-shrink-0">
+          <div className="w-48 h-48 relative flex-shrink-0 bg-gray-100">
             {/* Featured product star for list view */}
             {product.hierarchy === 1 && (
               <Star className="absolute top-2 right-2 w-5 h-5 text-yellow-500 fill-yellow-500 z-10 drop-shadow-sm" />
@@ -96,7 +99,7 @@ function ProductCard({ product, viewMode, index }: ProductCardProps) {
                 width={200}
                 height={200}
                 alt={product.name}
-                className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-200"
+                className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-200"
               />
             </Link>
           </div>
@@ -180,13 +183,15 @@ function ProductCard({ product, viewMode, index }: ProductCardProps) {
         )} */}
         
         <Link href={`/productos/${product.id}`}>
-            <ProductImage
-              src={product.imagepath}
-              width={300}
-              height={300}
-              alt={product.name}
-              className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-200"
-            />
+            <div className="aspect-square bg-gray-100 flex items-center justify-center overflow-hidden">
+              <ProductImage
+                src={product.imagepath}
+                width={300}
+                height={300}
+                alt={product.name}
+                className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-200"
+              />
+            </div>
         </Link>
       </div>
       
@@ -237,8 +242,12 @@ function ProductCard({ product, viewMode, index }: ProductCardProps) {
 }
 
 export default function ProductsPage() {
-  const categoryParam = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get("categoria") : null
-  
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
+  const categoryParam = searchParams.get("categoria")
+
   const [selectedCategory, setSelectedCategory] = useState("Todos los Productos")
   const [searchQuery, setSearchQuery] = useState("")
   const [sortBy, setSortBy] = useState<'name' | 'price' | 'rating' | 'created_at'>('name')
@@ -248,6 +257,22 @@ export default function ProductsPage() {
   const [currentPage, setCurrentPage] = useState(1)
 
   const { categories } = useCategories()
+
+  const createQueryString = useCallback((name: string, value: string | null) => {
+    const params = new URLSearchParams(searchParams.toString())
+    if (value === null || value === "Todos los Productos") {
+      params.delete(name)
+    } else {
+      params.set(name, value.toLowerCase().replace(/\s+/g, '-'))
+    }
+    return params.toString()
+  }, [searchParams])
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category)
+    const queryString = createQueryString("categoria", category)
+    router.push(`${pathname}${queryString ? `?${queryString}` : ''}`, { scroll: false })
+  }
 
   // Build filters for API
   const filters: ProductFilters = {
@@ -263,22 +288,26 @@ export default function ProductsPage() {
 
   useEffect(() => {
     if (categoryParam && categories.length > 0) {
-      const category = categories.find(cat => 
-        cat.name.toLowerCase().replace(/\s+/g, '-') === categoryParam.toLowerCase() || 
+      const category = categories.find(cat =>
+        cat.name.toLowerCase().replace(/\s+/g, '-') === categoryParam.toLowerCase() ||
         cat.name.toLowerCase() === categoryParam.toLowerCase()
       )
       if (category) {
         setSelectedCategory(category.name)
+      } else {
+        setSelectedCategory("Todos los Productos")
       }
+    } else {
+      setSelectedCategory("Todos los Productos")
     }
   }, [categoryParam, categories])
 
   useEffect(() => {
-    const urlSearchParam = new URLSearchParams(window.location.search).get("search")
+    const urlSearchParam = searchParams.get("search")
     if (urlSearchParam !== null) {
       setSearchQuery(urlSearchParam)
     }
-  }, [])
+  }, [searchParams])
 
   // Reset to first page when filters change
   useEffect(() => {
@@ -355,6 +384,7 @@ export default function ProductsPage() {
                     categories={categoriesData}
                     selectedCategory={selectedCategory}
                     setSelectedCategory={setSelectedCategory}
+                    onCategoryChange={handleCategoryChange}
                   />
                 </div>
               </div>
@@ -362,11 +392,12 @@ export default function ProductsPage() {
 
             {/* Desktop Sidebar */}
             <aside className="hidden lg:block lg:w-64 flex-shrink-0">
-<FilterSidebar
-                  categories={categoriesData}
-                  selectedCategory={selectedCategory}
-                  setSelectedCategory={setSelectedCategory}
-                />
+              <FilterSidebar
+                categories={categoriesData}
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+                onCategoryChange={handleCategoryChange}
+              />
             </aside>
 
             {/* Main Content */}
