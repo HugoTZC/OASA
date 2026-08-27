@@ -6,7 +6,7 @@ import { Star } from "lucide-react"
 import { ProductImage } from "./dynamic-image"
 import { ImageSkeleton } from "./image-skeleton"
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, '') || 'https://api.oasamexico.com'
+const BACKEND_URL = '/api/backend'
 
 interface Product {
   id: number
@@ -27,7 +27,7 @@ export function ProductsShowcase() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch(`${BACKEND_URL}/api/products?limit=8`)
+      const response = await fetch(`${BACKEND_URL}/products?limit=8`)
       const data = await response.json()
       if (data.products) {
         const featured = data.products.filter((p: Product) => p.isFeatured === true).slice(0, 4)
