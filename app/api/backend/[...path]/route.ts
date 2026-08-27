@@ -1,4 +1,4 @@
-const API_ORIGIN = "https://api.oasamexico.com"
+const API_ORIGIN = "https://www.api.oasamexico.com"
 
 async function proxy(request: Request, { params }: { params: Promise<{ path: string[] }> }) {
   const { path } = await params
