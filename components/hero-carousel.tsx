@@ -58,7 +58,7 @@ export function HeroCarousel() {
   }
 
   return (
-    <div className="relative w-full aspect-video overflow-hidden bg-slate-100">
+    <div className="relative w-full max-w-[1200px] mx-auto aspect-[1200/628] overflow-hidden bg-slate-100">
       {slides.map((slide, index) => (
         <div
           key={slide.id}
