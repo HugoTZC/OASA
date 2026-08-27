@@ -1,6 +1,6 @@
 "use client"
 
-import { Phone, Mail, Clock, User, MessageCircle, Headphones, Send } from "lucide-react"
+import { Phone, Mail, Clock, MessageCircle, Headphones, Send } from "lucide-react"
 import { SiteLayout } from "@/components/site-layout"
 import Altcha from "@/components/altcha"
 import { useState } from "react"
@@ -349,9 +349,11 @@ export default function AtencionPage() {
                   className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow"
                 >
                   <div className="text-center mb-4">
+                    {/* Placeholder de foto oculto temporalmente; puede restaurarse si el cliente lo solicita.
                     <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
                       <User className="w-12 h-12 text-gray-400" />
                     </div>
+                    */}
                     <h3 className="text-xl font-bold text-gray-900">{rep.name}</h3>
                     <p className="text-blue-800 font-medium">{rep.position}</p>
                   </div>
