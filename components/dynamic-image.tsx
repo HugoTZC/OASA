@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, '') || 'http://localhost:5000';
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, '') || 'https://api.oasamexico.com';
 
 function isAbsoluteUrl(str: string): boolean {
   return str.startsWith('http://') || str.startsWith('https://') || str.startsWith('//')
