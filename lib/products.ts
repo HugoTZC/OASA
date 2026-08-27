@@ -23,9 +23,6 @@ class ProductsService {
       
       const response = await fetch(url, {
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         cache: 'no-store', // Ensure fresh data
       });
 
@@ -70,7 +67,6 @@ class ProductsService {
     try {
       const response = await fetch(`${API_BASE_URL}/api/categories`, {
         method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
         cache: 'no-store',
       });
 
@@ -86,7 +82,6 @@ class ProductsService {
         if (typeof rawCategory === 'object' && rawCategory.name) return { ...rawCategory, code } as ProductCategory;
 
         const detailResponse = await fetch(`${API_BASE_URL}/api/categories/${encodeURIComponent(code)}`, {
-          headers: { 'Content-Type': 'application/json' },
           cache: 'no-store',
         });
         const detail = detailResponse.ok ? await detailResponse.json() : {};
