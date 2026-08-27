@@ -58,7 +58,7 @@ export function HeroCarousel() {
   }
 
   return (
-    <div className="relative w-full max-w-[1200px] mx-auto aspect-[1200/628] overflow-hidden bg-slate-100">
+    <div className="relative w-full aspect-[3/1] overflow-hidden bg-slate-100">
       {slides.map((slide, index) => (
         <div
           key={slide.id}
@@ -71,7 +71,7 @@ export function HeroCarousel() {
               <img
                 src={slide.image}
                 alt={`Banner ${index + 1}`}
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
               />
             </div>
             <div className="absolute inset-0 bg-black opacity-20"></div>
