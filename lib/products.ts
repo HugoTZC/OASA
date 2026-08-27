@@ -66,22 +66,46 @@ class ProductsService {
     }
   }
 
-  async getCategories(): Promise<string[]> {
+  async getCategories(): Promise<ProductCategory[]> {
     try {
       const response = await fetch(`${API_BASE_URL}/api/categories`, {
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         cache: 'no-store',
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
       const data = await response.json();
-      return data.categories || [];
+      const rawCategories = Array.isArray(data) ? data : data.categories || [];
+      const categories = await Promise.all(rawCategories.map(async (rawCategory: any, index: number) => {
+        const code = typeof rawCategory === 'string'
+          ? rawCategory
+          : rawCategory.code || rawCategory.cat_code || rawCategory.category_code || rawCategory.categoryCode || rawCategory.slug || '';
+        if (!code) return null;
+        if (typeof rawCategory === 'object' && rawCategory.name) return { ...rawCategory, code } as ProductCategory;
+
+        const detailResponse = await fetch(`${API_BASE_URL}/api/categories/${encodeURIComponent(code)}`, {
+          headers: { 'Content-Type': 'application/json' },
+          cache: 'no-store',
+        });
+        const detail = detailResponse.ok ? await detailResponse.json() : {};
+        const category = detail.category || detail.data || detail;
+        return {
+          id: category.id ?? index,
+          code,
+          name: category.name || category.category_name || code,
+          slug: category.slug || code.toLowerCase().replace(/\s+/g, '-'),
+          description: category.description,
+          parentId: category.parentId ?? category.parent_id ?? null,
+          imageUrl: category.imageUrl || category.image_url,
+          isActive: category.isActive ?? category.is_active ?? true,
+          sortOrder: category.sortOrder ?? category.sort_order ?? index,
+          createdAt: category.createdAt || category.created_at || '',
+          updatedAt: category.updatedAt || category.updated_at || '',
+        } as ProductCategory;
+      }));
+      return categories.filter((category): category is ProductCategory => category !== null);
     } catch (error) {
       console.error('Error fetching categories:', error);
       throw error;
