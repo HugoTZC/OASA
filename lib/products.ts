@@ -1,6 +1,6 @@
 import { Product, ProductsResponse, ProductCategory, ProductFilters } from '@/types/products';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, '') || 'http://localhost:5000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, '') || 'https://api.oasamexico.com';
 
 class ProductsService {
   private baseUrl: string;
@@ -77,7 +77,7 @@ class ProductsService {
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
       const data = await response.json();
-      const rawCategories = Array.isArray(data) ? data : data.categories || [];
+      const rawCategories = Array.isArray(data) ? data : Array.isArray(data.categories) ? data.categories : Array.isArray(data.data) ? data.data : [];
       const categories = await Promise.all(rawCategories.map(async (rawCategory: any, index: number) => {
         const code = typeof rawCategory === 'string'
           ? rawCategory
