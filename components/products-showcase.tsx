@@ -6,7 +6,7 @@ import { Star } from "lucide-react"
 import { ProductImage } from "./dynamic-image"
 import { ImageSkeleton } from "./image-skeleton"
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, '') || 'http://localhost:5000'
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, '') || 'https://api.oasamexico.com'
 
 interface Product {
   id: number
