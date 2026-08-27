@@ -32,7 +32,7 @@ export function ShoppingProvider({ children }: { children: React.ReactNode }) {
 
   const refreshSettings = async () => {
     try {
-      const response = await fetch(`${BACKEND_URL}/api/settings/shopping`)
+      const response = await fetch(`${BACKEND_URL}/settings/shopping`)
       if (response.ok) {
         const data = await response.json()
         setSettings({
