@@ -107,11 +107,11 @@ class ProductsService {
         const item = rawCategory?.category ?? rawCategory;
         const code = typeof item === 'string'
           ? item
-          : item?.code || item?.cat_code || item?.category_code || item?.categoryCode || item?.slug || '';
+          : item?.code || item?.cat_code || item?.category_code || item?.categoryCode || item?.slug || item?.name || '';
         if (!code) return null;
 
         const initialName = typeof item === 'object'
-          ? item.name || item.category_name || item.cat_name || item.description
+          ? item.displayName || item.category_name || item.cat_name || item.description
           : undefined;
 
         let category: any = item;
@@ -128,7 +128,7 @@ class ProductsService {
         return {
           id: category?.id ?? index,
           code,
-          name: initialName || category?.name || category?.category_name || category?.cat_name || category?.description || code,
+          name: initialName || category?.cat_name || category?.category_name || category?.displayName || category?.name || category?.description || code,
           slug: category?.slug || code.toLowerCase().replace(/\s+/g, '-'),
           description: category?.description,
           parentId: category?.parentId ?? category?.parent_id ?? null,
