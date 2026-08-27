@@ -60,7 +60,11 @@ export function HeroCarousel() {
   }
 
   return (
+<<<<<<< Updated upstream
     <div className="relative w-full aspect-[3/1] overflow-hidden bg-slate-100">
+=======
+    <div className="relative h-[calc(100svh-170px)] min-h-[420px] max-h-[860px] overflow-hidden sm:h-[calc(100svh-170px)] md:min-h-[520px]">
+>>>>>>> Stashed changes
       {slides.map((slide, index) => (
         <div
           key={slide.id}
