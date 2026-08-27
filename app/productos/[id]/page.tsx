@@ -96,8 +96,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
             {/* Product Info */}
             <div>
-              <div className="text-sm text-blue-800 mb-2">{product.category}</div>
-              <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
+              <div className="text-sm text-blue-800 mb-2">{product.category}</div>\n              <h1 className="text-3xl font-bold mb-2">{product.name}</h1>\n              <div className="text-sm text-gray-600 mb-4">SKU: {product.sku || "No disponible"}</div>
 
               {/* Description */}
               {product.description && (
