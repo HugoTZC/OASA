@@ -6,7 +6,7 @@ class ProductsService {
   private baseUrl: string;
 
   constructor() {
-    this.baseUrl = `${API_BASE_URL}/api/products`;
+    this.baseUrl = `${API_BASE_URL}/products`;
   }
 
   async getProducts(filters: ProductFilters = {}): Promise<ProductsResponse> {
@@ -65,7 +65,7 @@ class ProductsService {
 
   async getCategories(): Promise<ProductCategory[]> {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/categories`, {
+      const response = await fetch(`${API_BASE_URL}/categories`, {
         method: 'GET',
         cache: 'no-store',
       });
@@ -81,7 +81,7 @@ class ProductsService {
         if (!code) return null;
         if (typeof rawCategory === 'object' && rawCategory.name) return { ...rawCategory, code } as ProductCategory;
 
-        const detailResponse = await fetch(`${API_BASE_URL}/api/categories/${encodeURIComponent(code)}`, {
+        const detailResponse = await fetch(`${API_BASE_URL}/categories/${encodeURIComponent(code)}`, {
           cache: 'no-store',
         });
         const detail = detailResponse.ok ? await detailResponse.json() : {};
