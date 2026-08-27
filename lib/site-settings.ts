@@ -17,7 +17,7 @@ class SiteSettingsService {
    */
   async getSiteSettings(): Promise<SiteSettingsResponse> {
     try {
-      const response = await fetch(`${BACKEND_URL}/api/settings/shopping`)
+      const response = await fetch(`${BACKEND_URL}/settings/shopping`)
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
@@ -40,7 +40,7 @@ class SiteSettingsService {
    */
   async updateSiteSettings(settings: any): Promise<SiteSettingsResponse> {
     try {
-      const response = await fetch(`${BACKEND_URL}/api/settings/shopping`, {
+      const response = await fetch(`${BACKEND_URL}/settings/shopping`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ class SiteSettingsService {
    */
   async updateSetting(key: string, value: any): Promise<SiteSettingsResponse> {
     try {
-      const response = await fetch(`${BACKEND_URL}/api/settings/shopping`, {
+      const response = await fetch(`${BACKEND_URL}/settings/shopping`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
