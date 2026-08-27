@@ -106,7 +106,7 @@ function ProductCard({ product, viewMode, index }: ProductCardProps) {
           <div className="flex-1 p-6">
             <div className="flex justify-between items-start">
               <div className="flex-1">
-                <span className="text-sm text-blue-800 font-medium">{product.category}</span>
+                <span className="text-sm text-blue-800 font-medium">{product.sku || "SKU no disponible"}</span>
                 <h3 className="font-semibold text-xl text-gray-900 mt-1 group-hover:text-blue-800">
                   <Link href={`/productos/${product.id}`}>{product.name}</Link>
                 </h3>
@@ -196,7 +196,7 @@ function ProductCard({ product, viewMode, index }: ProductCardProps) {
       </div>
       
       <div className="p-3 md:p-4">
-        <span className="text-xs text-blue-800 font-medium">{product.category}</span>
+        <span className="text-xs text-blue-800 font-medium">{product.sku || "SKU no disponible"}</span>
         <h3 className="font-semibold text-gray-900 mt-1 group-hover:text-blue-800 text-sm md:text-base line-clamp-2">
           <Link href={`/productos/${product.id}`}>{product.name}</Link>
         </h3>
@@ -275,12 +275,12 @@ export default function ProductsPage() {
   }
 
   // Build filters for API
-  const filters: ProductFilters = {
+  const selectedCategoryData = categories.find((category) => category.name === selectedCategory)\n\n  const filters: ProductFilters = {
     page: currentPage,
     limit: 12,
     sortBy,
     sortOrder,
-    ...(selectedCategory !== "Todos los Productos" && { category: selectedCategory }),
+    ...(selectedCategory !== "Todos los Productos" && { category: selectedCategoryData?.code || selectedCategory }),
     ...(searchQuery && { search: searchQuery }),
   }
 
