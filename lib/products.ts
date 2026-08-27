@@ -1,6 +1,6 @@
 import { Product, ProductsResponse, ProductCategory, ProductFilters } from '@/types/products';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, '') || 'https://api.oasamexico.com';
+const API_BASE_URL = '/api/backend';
 
 class ProductsService {
   private baseUrl: string;
