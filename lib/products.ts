@@ -74,7 +74,7 @@ class ProductsService {
 
       const data = await response.json();
       const container = data?.data ?? data;
-      const rawCategories = Array.isArray(container)
+      let rawCategories = Array.isArray(container)
         ? container
         : Array.isArray(container?.categories)
           ? container.categories
@@ -83,6 +83,25 @@ class ProductsService {
             : Array.isArray(data?.categories)
               ? data.categories
               : [];
+
+      // Fallback: recover category codes from the products response so filters
+      // remain available even if the categories endpoint returns an empty shape.
+      if (rawCategories.length === 0) {
+        const productsResponse = await fetch(`${API_BASE_URL}/products?limit=100`, {
+          cache: 'no-store',
+        });
+        if (productsResponse.ok) {
+          const productsData = await productsResponse.json();
+          const products = Array.isArray(productsData)
+            ? productsData
+            : productsData?.products || productsData?.data?.products || [];
+          rawCategories = Array.from(new Set(
+            products
+              .map((product: any) => product?.category || product?.category_code || product?.cat_code)
+              .filter(Boolean)
+          ));
+        }
+      }
 
       const categories = await Promise.all(rawCategories.map(async (rawCategory: any, index: number) => {
         const item = rawCategory?.category ?? rawCategory;
