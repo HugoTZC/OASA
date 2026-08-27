@@ -13,7 +13,7 @@ import { useProducts, useCategories } from "@/hooks/use-products"
 import { ProductFilters, Product } from "@/types/products"
 
 interface FilterSidebarProps {
-  categories: Array<{ name: string; slug: string }>
+  categories: Array<{ name: string; slug: string; code?: string }>
   selectedCategory: string
   setSelectedCategory: (category: string) => void
   onCategoryChange: (category: string) => void
@@ -36,9 +36,9 @@ function FilterSidebar({
           {categories.map((category) => (
             <button
               key={category.name}
-              onClick={() => onCategoryChange(category.name)}
+              onClick={() => onCategoryChange(category.code || category.name)}
               className={`block w-full text-left px-3 py-2 rounded-md transition-colors text-sm ${
-                selectedCategory === category.name ? "bg-blue-800 text-white" : "hover:bg-gray-100"
+                (selectedCategory === category.name || selectedCategory === category.code) ? "bg-blue-800 text-white" : "hover:bg-gray-100"
               }`}
             >
               {category.name}
@@ -268,9 +268,16 @@ export default function ProductsPage() {
     return params.toString()
   }, [searchParams])
 
-  const handleCategoryChange = (category: string) => {
-    setSelectedCategory(category)
-    const queryString = createQueryString("categoria", category)
+  const handleCategoryChange = (identifier: string) => {
+    const category = categories.find((item) =>
+      item.code === identifier ||
+      item.name === identifier ||
+      item.slug === identifier
+    )
+    const displayName = category?.name || identifier
+    const filterCode = category?.code || identifier
+    setSelectedCategory(displayName)
+    const queryString = createQueryString("categoria", filterCode)
     router.push(`${pathname}${queryString ? `?${queryString}` : ''}`, { scroll: false })
   }
 
@@ -291,6 +298,7 @@ export default function ProductsPage() {
   useEffect(() => {
     if (categoryParam && categories.length > 0) {
       const category = categories.find(cat =>
+        cat.code?.toLowerCase() === categoryParam.toLowerCase() ||
         cat.name.toLowerCase().replace(/\s+/g, '-') === categoryParam.toLowerCase() ||
         cat.name.toLowerCase() === categoryParam.toLowerCase()
       )
@@ -318,7 +326,11 @@ export default function ProductsPage() {
 
   const categoriesData = [
     { name: "Todos los Productos", slug: "todos" },
-    ...categories.map(cat => ({ name: cat.name, slug: cat.name.toLowerCase().replace(/\s+/g, '-') }))
+    ...categories.map(cat => ({
+      name: cat.name,
+      code: cat.code,
+      slug: cat.slug || cat.name.toLowerCase().replace(/\s+/g, '-')
+    }))
   ]
 
   const handleSearch = (query: string) => {
