@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react"
 import { CategoryImage } from "./dynamic-image"
 import { productsService } from "@/lib/products"
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, '') || 'http://localhost:5000'
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, '') || 'https://api.oasamexico.com'
 
 interface CategoryWithImage {
   id: string
