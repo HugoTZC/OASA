@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
-import { CategoryImage } from "./dynamic-image"
+import { CategoryImage } from "./dynamic-image"\nimport { productsService } from "@/lib/products"
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, '') || 'http://localhost:5000'
 
@@ -30,24 +30,7 @@ export function CategoryShowcase() {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
-      const data = await response.json()
-      if (data.success && Array.isArray(data.categories)) {
-        const categoriesWithImages = await Promise.all(
-          data.categories.slice(0, 3).map(async (cat: { name: string; productCount: number }) => {
-            const imageUrl = await fetchFirstProductImage(cat.name)
-            return {
-              id: cat.name,
-              name: cat.name,
-              description: "",
-              productCount: `${cat.productCount} productos`,
-              href: `/productos?categoria=${encodeURIComponent(cat.name)}`,
-              imageUrl,
-            }
-          })
-        )
-        setCategories(categoriesWithImages)
-      }
-    } catch (error) {
+      const categoriesData = await productsService.getCategories()\n      const categoriesWithImages = await Promise.all(\n        categoriesData.slice(0, 3).map(async (cat) => {\n          const productsData = await productsService.getProducts({ category: cat.code || cat.name, limit: 1 })\n          const imagePath = productsData.products?.[0]?.imagepath\n          const imageUrl = imagePath\n            ? imagePath.startsWith("http") ? imagePath : `${BACKEND_URL}${imagePath}`\n            : null\n          return {\n            id: String(cat.id),\n            name: cat.name,\n            description: cat.description || "",\n            productCount: `${productsData.pagination?.total || 0} productos`,\n            href: `/productos?categoria=${encodeURIComponent(cat.code || cat.name)}`,\n            imageUrl,\n          }\n        })\n      )\n      setCategories(categoriesWithImages)\n    } catch (error) {
       console.error("Failed to fetch categories:", error)
       setCategories([
         {
