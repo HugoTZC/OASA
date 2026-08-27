@@ -19,6 +19,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   const { id } = use(params)
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(true)
+  const { categories } = useCategories()
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -33,6 +34,10 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
     }
     fetchProduct()
   }, [id])
+
+  const displayCategory = product
+    ? categories.find((category) => category.code === product.category || category.name === product.category)?.name || product.category
+    : ""
 
   return (
     <SiteLayout>
