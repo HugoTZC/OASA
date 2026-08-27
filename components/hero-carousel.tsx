@@ -4,10 +4,12 @@ import { useState, useEffect } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import type { HeroSlide } from "@/types/admin"
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/$/, "") || "https://api.oasamexico.com"
+
 const BANNERS = [
-  "/banner1.webp",
-  "/banner2.jpg",
-  "/banner3.webp",
+  `${API_BASE_URL}/api/banners/banner1`,
+  `${API_BASE_URL}/api/banners/banner2`,
+  `${API_BASE_URL}/api/banners/banner3`,
 ]
 
 export function HeroCarousel() {
