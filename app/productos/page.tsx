@@ -275,7 +275,9 @@ export default function ProductsPage() {
   }
 
   // Build filters for API
-  const selectedCategoryData = categories.find((category) => category.name === selectedCategory)\n\n  const filters: ProductFilters = {
+  const selectedCategoryData = categories.find((category) => category.name === selectedCategory)
+
+  const filters: ProductFilters = {
     page: currentPage,
     limit: 12,
     sortBy,
