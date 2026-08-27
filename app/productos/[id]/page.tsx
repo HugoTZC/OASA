@@ -9,7 +9,8 @@ import { useShoppingFeatures } from "@/hooks/use-shopping-features"
 import { SiteLayout } from "@/components/site-layout"
 import { ProductImage } from "@/components/dynamic-image"
 import Link from "next/link"
-import { productsService } from "@/lib/products"\nimport { useCategories } from "@/hooks/use-products"
+import { productsService } from "@/lib/products"
+import { useCategories } from "@/hooks/use-products"
 import { Product } from "@/types/products"
 
 export default function ProductPage({ params }: { params: Promise<{ id: string }> }) {
@@ -96,7 +97,9 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
             {/* Product Info */}
             <div>
-              <div className="text-sm text-blue-800 mb-2">{displayCategory}</div>\n              <h1 className="text-3xl font-bold mb-2">{product.name}</h1>\n              <div className="text-sm text-gray-600 mb-4">SKU: {product.sku || "No disponible"}</div>
+              <div className="text-sm text-blue-800 mb-2">{displayCategory}</div>
+              <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
+              <div className="text-sm text-gray-600 mb-4">SKU: {product.sku || "No disponible"}</div>
 
               {/* Description */}
               {product.description && (
