@@ -35,9 +35,11 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
     fetchProduct()
   }, [id])
 
-  const displayCategory = product
-    ? categories.find((category) => category.code === product.category || category.name === product.category)?.name || product.category
-    : ""
+  const matchingCategory = product
+    ? categories.find((category) => category.code === product.category || category.name === product.category)
+    : undefined
+  const displayCategory = matchingCategory?.name || product?.category || ""
+  const breadcrumbCategory = matchingCategory?.code || product?.category || ""
 
   return (
     <SiteLayout>
@@ -54,9 +56,9 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
               Productos
             </Link>
             <ChevronRight className="w-4 h-4 text-gray-400" />
-            <span className="text-gray-500">{displayCategory}</span>
+            <span className="text-gray-500">{breadcrumbCategory}</span>
             <ChevronRight className="w-4 h-4 text-gray-400" />
-            <span className="text-blue-800 font-medium">{product?.name}</span>
+            <span className="text-blue-800 font-medium">{product?.sku || "SKU no disponible"}</span>
           </div>
         </div>
       </nav>
