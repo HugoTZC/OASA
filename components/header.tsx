@@ -310,8 +310,8 @@ export function Header() {
             >
               Atención a clientes
             </Link> */}
-            <Link href="/catalogo" className="block py-3 text-gray-700 hover:text-blue-800 text-sm">
-              Catálogo de Productos
+            <Link href="/atencion" className="block py-3 text-gray-700 hover:text-blue-800 text-sm">
+              Contactanos
             </Link>
           </div>
         </div>
