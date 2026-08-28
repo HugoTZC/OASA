@@ -2,9 +2,8 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Star } from "lucide-react"
-import { ProductImage } from "./dynamic-image"
 import { ImageSkeleton } from "./image-skeleton"
+import { ProductCard } from "./product-card"
 
 const BACKEND_URL = '/api/backend'
 
@@ -81,26 +80,11 @@ export function ProductsShowcase() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product) => (
-            <Link key={product.id} href={`/productos/${product.id}`} className="group">
-              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-200">
-                <div className="aspect-square bg-white flex items-center justify-center overflow-hidden relative">
-                  <Star className="absolute top-2 right-2 w-5 h-5 text-yellow-500 fill-yellow-500 z-10 drop-shadow-sm" />
-                  <ProductImage
-                    src={product.imagepath}
-                    width={200}
-                    height={200}
-                    alt={product.name}
-                    className="object-contain w-full h-full group-hover:scale-105 transition-transform duration-200"
-                  />
-                </div>
-                <div className="p-4">
-                  <span className="text-xs text-blue-800 font-medium">{product.category}</span>
-                  <h3 className="font-semibold text-gray-900 mt-1 group-hover:text-blue-800 line-clamp-2">
-                    {product.name}
-                  </h3>
-                </div>
-              </div>
-            </Link>
+            <ProductCard
+              key={product.id}
+              product={product}
+              viewMode="grid"
+            />
           ))}
         </div>
       </div>
