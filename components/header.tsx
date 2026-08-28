@@ -238,7 +238,7 @@ export function Header() {
 
       {/* Mobile Menu */}
       {user?.role !== "admin" && (
-        <div className={`absolute left-0 right-0 top-full z-50 overflow-hidden border-t border-gray-200 bg-white shadow-xl transition-all duration-300 md:hidden ${isMobileMenuOpen ? "max-h-screen translate-y-0 opacity-100" : "pointer-events-none max-h-0 -translate-y-2 opacity-0"}`}>
+        <div className={`absolute left-3 right-3 top-full z-50 mt-2 overflow-hidden rounded-2xl border-2 border-blue-800 bg-white shadow-2xl ring-4 ring-blue-900/10 transition-all duration-300 md:hidden ${isMobileMenuOpen ? "max-h-screen translate-y-0 opacity-100" : "pointer-events-none max-h-0 -translate-y-2 opacity-0"}`}>
           <div className="px-4 py-2 space-y-1">
             {/* User Actions and cart functionality commented out per client request */}
             {/* <div className="border-b border-gray-200 pb-3 mb-3">
