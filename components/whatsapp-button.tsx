@@ -10,11 +10,11 @@ export function WhatsAppButton() {
   return (
     <button
       onClick={handleWhatsAppClick}
-      className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-colors duration-200 z-50"
+      className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-green-500 px-4 py-3 text-white shadow-lg transition-colors duration-200 hover:bg-green-600"
       aria-label="Contactar por WhatsApp"
     >
-      <MessageCircle className="w-6 h-6" />
-      <span className="absolute -top-2 -left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full whitespace-nowrap">
+      <MessageCircle className="h-6 w-6 shrink-0" />
+      <span className="whitespace-nowrap text-sm font-medium leading-none">
         ¡Escríbenos!
       </span>
     </button>
