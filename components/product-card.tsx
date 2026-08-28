@@ -4,7 +4,22 @@ import Link from "next/link"
 import { Star } from "lucide-react"
 import { ProductImage } from "@/components/dynamic-image"
 
-export interface ProductCardProduct {\n  id: number\n  name: string\n  sku?: string\n  description?: string\n  imagepath?: string | null\n  hierarchy: number\n}\n\ninterface ProductCardProps {\n  product: ProductCardProduct\n  viewMode: "grid" | "list"\n  index?: number\n}\n\nexport function ProductCard({ product, viewMode }: ProductCardProps) {
+export interface ProductCardProduct {
+  id: number
+  name: string
+  sku?: string
+  description?: string
+  imagepath?: string | null
+  hierarchy: number
+}
+
+interface ProductCardProps {
+  product: ProductCardProduct
+  viewMode: "grid" | "list"
+  index?: number
+}
+
+export function ProductCard({ product, viewMode }: ProductCardProps) {
 
   if (viewMode === "list") {
     return (
@@ -81,7 +96,7 @@ export interface ProductCardProduct {\n  id: number\n  name: string\n  sku?: str
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group">
+    <div className="h-full bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group flex flex-col">
       {/* Product Badges - commented out per client request */}
       <div className="relative">
         {/* Featured product star */}
@@ -117,7 +132,7 @@ export interface ProductCardProduct {\n  id: number\n  name: string\n  sku?: str
         </Link>
       </div>
       
-      <div className="p-3 md:p-4">
+      <div className="p-3 md:p-4 min-h-[92px] flex-1">
         <span className="text-xs text-blue-800 font-medium">{product.sku || "SKU no disponible"}</span>
         <h3 className="font-semibold text-gray-900 mt-1 group-hover:text-blue-800 text-sm md:text-base line-clamp-2">
           <Link href={`/productos/${product.id}`}>{product.name}</Link>
