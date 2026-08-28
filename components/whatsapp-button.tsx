@@ -1,17 +1,18 @@
 "use client"
 
 import { MessageCircle } from "lucide-react"
-import { useRef, useState } from "react"
+import { useRef, useState, type MouseEvent, type PointerEvent } from "react"
 
 export function WhatsAppButton() {
   const [touchExpanded, setTouchExpanded] = useState(false)
   const touchCanceled = useRef(false)
+  const ignoreClickUntil = useRef(0)
 
   const openWhatsApp = () => {
     window.open("https://wa.me/526561234567", "_blank")
   }
 
-  const handlePointerDown = (event: React.PointerEvent<HTMLButtonElement>) => {
+  const handlePointerDown = (event: PointerEvent<HTMLButtonElement>) => {
     if (event.pointerType === "touch") {
       touchCanceled.current = false
       setTouchExpanded(true)
@@ -19,7 +20,7 @@ export function WhatsAppButton() {
     }
   }
 
-  const handlePointerMove = (event: React.PointerEvent<HTMLButtonElement>) => {
+  const handlePointerMove = (event: PointerEvent<HTMLButtonElement>) => {
     if (event.pointerType === "touch" && touchExpanded) {
       const bounds = event.currentTarget.getBoundingClientRect()
       const inside =
@@ -35,7 +36,7 @@ export function WhatsAppButton() {
     }
   }
 
-  const handlePointerUp = (event: React.PointerEvent<HTMLButtonElement>) => {
+  const handlePointerUp = (event: PointerEvent<HTMLButtonElement>) => {
     if (event.pointerType === "touch") {
       if (!touchCanceled.current) {
         openWhatsApp()
@@ -45,7 +46,7 @@ export function WhatsAppButton() {
     }
   }
 
-  const handlePointerCancel = (event: React.PointerEvent<HTMLButtonElement>) => {
+  const handlePointerCancel = (event: PointerEvent<HTMLButtonElement>) => {
     if (event.pointerType === "touch") {
       touchCanceled.current = true
       setTouchExpanded(false)
