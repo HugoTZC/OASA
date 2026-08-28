@@ -147,17 +147,18 @@ export default function AtencionPage() {
                 procesar tus pedidos y brindarte el mejor servicio.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                {/* Botón "Llamar Ahora" oculto temporalmente a solicitud del cliente.
                 <a 
                   href="tel:656-123-4567"
                   className="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors inline-block text-center"
                 >
                   Llamar Ahora
                 </a>
-                <a 
+                */}                <a 
                   href="https://wa.me/526561234567?text=Hola%20Tiendaoasa,%20tengo%20una%20consulta"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-green-800 transition-colors inline-block text-center"
+                  className="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors inline-block text-center"
                 >
                   Enviar WhatsApp
                 </a>
