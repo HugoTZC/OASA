@@ -45,7 +45,7 @@ export function ProductCard({ product, viewMode }: ProductCardProps) {
               <div className="flex-1">
                 <span className="text-sm text-blue-800 font-medium">{product.sku || "SKU no disponible"}</span>
                 <h3 className="font-semibold text-xl text-gray-900 mt-1 group-hover:text-blue-800">
-                  <Link href={`/productos/${product.id}`}>{product.name}</Link>
+                  <Link href={`/productos/${product.id}`} title={product.name}>{product.name}</Link>
                 </h3>
                 
                 {/* Rating section commented out per client request */}
