@@ -45,9 +45,9 @@ export function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-md hover:bg-gray-100"
+            className="md:hidden rounded-lg border border-gray-200 bg-white p-2 text-blue-900 shadow-sm transition-all duration-300 hover:bg-blue-50" aria-label="Abrir menú de navegación"
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMobileMenuOpen ? <X className="h-6 w-6 rotate-90 transition-transform duration-300" /> : <Menu className="h-6 w-6 transition-transform duration-300" />}
           </button>
 
           {/* Desktop Search Bar */}
@@ -237,8 +237,8 @@ export function Header() {
       </div>
 
       {/* Mobile Menu */}
-      {isMobileMenuOpen && user?.role !== "admin" && (
-        <div className="md:hidden bg-white border-t border-gray-200 absolute top-full left-0 right-0 z-50 max-h-screen overflow-y-auto">
+      {user?.role !== "admin" && (
+        <div className={`absolute left-0 right-0 top-full z-50 overflow-hidden border-t border-gray-200 bg-white shadow-xl transition-all duration-300 md:hidden ${isMobileMenuOpen ? "max-h-screen translate-y-0 opacity-100" : "pointer-events-none max-h-0 -translate-y-2 opacity-0"}`}>
           <div className="px-4 py-2 space-y-1">
             {/* User Actions and cart functionality commented out per client request */}
             {/* <div className="border-b border-gray-200 pb-3 mb-3">
