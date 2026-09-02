@@ -25,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className={inter.className}>
+      <body className={inter.className} data-land-line={process.env.LAND_LINE || ""} data-wa-line={process.env.WA_LINE || ""}>
         <SiteSettingsProvider>
           <AuthProvider>
             <ShoppingProvider>
