@@ -10,7 +10,8 @@ export function WhatsAppButton() {
   const ignoreClickUntil = useRef(0)
 
   const openWhatsApp = () => {
-    window.open("https://wa.me/526561234567", "_blank")
+    const number = readContactNumber("waLine")
+    if (number) window.open(mexicanWhatsAppUrl(number), "_blank")
   }
 
   const handlePointerDown = (event: PointerEvent<HTMLButtonElement>) => {
