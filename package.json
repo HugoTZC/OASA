@@ -40,6 +40,7 @@
     "@radix-ui/react-tooltip": "1.1.6",
     "@types/pg": "^8.15.4",
     "@vercel/speed-insights": "^1.2.0",
+    "altcha": "^3.2.2",
     "altcha-lib": "^1.4.1",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.1",
