@@ -3,7 +3,8 @@
 import { Phone, Mail, Clock, MessageCircle, Headphones, Send } from "lucide-react"
 import { SiteLayout } from "@/components/site-layout"
 import Altcha from "@/components/altcha"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { formatPhoneNumber, mexicanWhatsAppUrl, readContactNumber } from "@/lib/contact"
 
 const representatives = [
   {
@@ -66,14 +67,14 @@ const contactMethods = [
   {
     icon: Phone,
     title: "Línea Principal",
-    info: "656-123-4567",
+    info: "LAND_LINE",
     description: "Llamada gratuita desde cualquier parte de México",
     available: "24/7",
   },
   {
     icon: Phone,
     title: "Oficina Tijuana",
-    info: "(656) 123-4567",
+    info: "LAND_LINE",
     description: "Atención directa desde nuestra oficina principal",
     available: "Lun-Vie 8:00-18:00",
   },
@@ -87,7 +88,7 @@ const contactMethods = [
   {
     icon: MessageCircle,
     title: "WhatsApp Business",
-    info: "+52 686 516 4283",
+    info: "WA_LINE",
     description: "Chat directo para consultas rápidas",
     available: "Lun-Vie 8:00-18:00",
   },
@@ -110,8 +111,16 @@ export default function AtencionPage() {
     subject: "",
     message: "",
   })
+  const [contactNumbers, setContactNumbers] = useState({ landLine: "", waLine: "" })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
+
+  useEffect(() => {
+    setContactNumbers({
+      landLine: readContactNumber("landLine"),
+      waLine: readContactNumber("waLine"),
+    })
+  }, [])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -155,7 +164,7 @@ export default function AtencionPage() {
                   Llamar Ahora
                 </a>
                 */}                <a 
-                  href="https://wa.me/526561234567?text=Hola%20Tiendaoasa,%20tengo%20una%20consulta"
+                  href={mexicanWhatsAppUrl(contactNumbers.waLine, "Hola Tiendaoasa, tengo una consulta")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors inline-block text-center"
@@ -324,7 +333,7 @@ export default function AtencionPage() {
                       <IconComponent className="w-8 h-8 text-green-800" />
                     </div>
                     <h3 className="text-xl font-bold mb-2 text-gray-900">{method.title}</h3>
-                    <p className="text-2xl font-bold text-green-800 mb-2">{method.info}</p>
+                    <p className="text-2xl font-bold text-green-800 mb-2">{method.info === "LAND_LINE" ? formatPhoneNumber(contactNumbers.landLine) : method.info === "WA_LINE" ? formatPhoneNumber(contactNumbers.waLine) : method.info}</p>
                     <p className="text-gray-600 mb-3">{method.description}</p>
                     <span className="text-sm text-blue-800 font-medium">{method.available}</span>
                   </div>
