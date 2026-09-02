@@ -8,15 +8,15 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
           {/* OASA Column */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <h3 className="text-yellow-400 font-bold text-base sm:text-lg mb-3 sm:mb-4">OASA</h3>
+            <h3 className="text-yellow-400 font-bold text-base sm:text-lg mb-3 sm:mb-4">Oxígeno y Soldaduras de Juárez SA de CV</h3>
             <p className="text-xs sm:text-sm mb-3 sm:mb-4">
-              Con más de XX años de experiencia brindándote lo mejor en:
+              Oscar Flores 2695
             </p>
             <ul className="text-xs sm:text-sm space-y-1 sm:space-y-2">
-              <li>• Gases industriales</li>
+              <li>Colonia División del Norte</li>
               {/* <li>• Autopartes</li> */}
-              <li>• Herramientas</li>
-              <li>• Equipos de soldadura</li>
+              <li>Ciudad Juárez, Chihuahua, México</li>
+              <li>CP 32688</li>
             </ul>
           </div>
 
@@ -94,7 +94,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-blue-800 mt-4 sm:mt-6 md:mt-8 pt-4 sm:pt-6 md:pt-8 text-center text-xs sm:text-sm">
-          <p>&copy; 2025 OASA - La tienda de los expertos. Todos los derechos reservados.</p>
+          <p>&copy; 2025 Oxígeno y Soldaduras de Juárez SA de CV. Todos los derechos reservados.</p>
           {/* Temporary Admin Access Link */}
           <div className="mt-2">
             {/* <Link href="/admin" className="text-yellow-400 hover:text-yellow-300 underline">

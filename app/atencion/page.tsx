@@ -71,17 +71,17 @@ const contactMethods = [
     description: "Llamada gratuita desde cualquier parte de México",
     available: "24/7",
   },
-  {
-    icon: Phone,
-    title: "Oficina Tijuana",
-    info: "LAND_LINE",
-    description: "Atención directa desde nuestra oficina principal",
-    available: "Lun-Vie 8:00-18:00",
-  },
+  // {
+  //   icon: Phone,
+  //   title: "Oficina Tijuana",
+  //   info: "LAND_LINE",
+  //   description: "Atención directa desde nuestra oficina principal",
+  //   available: "Lun-Vie 8:00-18:00",
+  // },
   {
     icon: Mail,
     title: "Correo General",
-    info: "info@tiendaoasa.com",
+    info: "info@oasamexico.com",
     description: "Para consultas generales y información",
     available: "Respuesta en 24 hrs",
   },
@@ -344,7 +344,7 @@ export default function AtencionPage() {
         </section>
 
         {/* Representatives */}
-        <section className="py-16 bg-white">
+        {/* <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-4xl font-bold mb-4 text-gray-900">Nuestros Representantes</h2>
@@ -363,7 +363,7 @@ export default function AtencionPage() {
                     <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
                       <User className="w-12 h-12 text-gray-400" />
                     </div>
-                    */}
+                    
                     <h3 className="text-xl font-bold text-gray-900">{rep.name}</h3>
                     <p className="text-blue-800 font-medium">{rep.position}</p>
                   </div>
@@ -408,15 +408,15 @@ export default function AtencionPage() {
                     >
                       Email
                     </a>
-                  </div> */}
+                  </div>
                 </div>
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Departments */}
-        <section className="py-16 bg-gray-50">
+        {/* <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-4xl font-bold mb-4 text-gray-900">Departamentos</h2>
@@ -442,7 +442,7 @@ export default function AtencionPage() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Emergency Contact */}
         {/* <section className="py-16 bg-red-800 text-white">
