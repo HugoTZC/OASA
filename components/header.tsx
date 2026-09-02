@@ -211,11 +211,16 @@ export function Header() {
                   Servicios Industriales
                 </Link>
               </li> */}
-              {/* <li>
+              <li>
                 <Link href="/sucursales" className="text-gray-700 hover:text-blue-800 whitespace-nowrap">
                   Sucursales
                 </Link>
-              </li> */}
+              </li>
+              <li>
+                <Link href="/marcas" className="text-gray-700 hover:text-blue-800 whitespace-nowrap">
+                  Marcas
+                </Link>
+              </li>
               {/* <li>
                 <Link href="/blog" className="text-gray-700 hover:text-blue-800 whitespace-nowrap">
                   Blog
@@ -280,36 +285,12 @@ export function Header() {
             >
               Productos
             </Link>
-            {/* <Link
-              href="/creditos"
-              className="block py-3 text-gray-700 hover:text-blue-800 border-b border-gray-100 text-sm"
-            >
-              Créditos
-            </Link>
-            <Link
-              href="/servicios"
-              className="block py-3 text-gray-700 hover:text-blue-800 border-b border-gray-100 text-sm"
-            >
-              Servicios Industriales
-            </Link>
-            <Link
-              href="/sucursales"
-              className="block py-3 text-gray-700 hover:text-blue-800 border-b border-gray-100 text-sm"
-            >
+            <Link href="/sucursales" className="block py-3 text-gray-700 hover:text-blue-800 border-b border-gray-100 text-sm">
               Sucursales
             </Link>
-            <Link
-              href="/blog"
-              className="block py-3 text-gray-700 hover:text-blue-800 border-b border-gray-100 text-sm"
-            >
-              Blog
+            <Link href="/marcas" className="block py-3 text-gray-700 hover:text-blue-800 border-b border-gray-100 text-sm">
+              Marcas
             </Link>
-            <Link
-              href="/atencion"
-              className="block py-3 text-gray-700 hover:text-blue-800 border-b border-gray-100 text-sm"
-            >
-              Atención a clientes
-            </Link> */}
             <Link href="/atencion" className="block py-3 text-gray-700 hover:text-blue-800 text-sm">
               Contactanos
             </Link>
