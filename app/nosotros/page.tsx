@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 import { Users, Award, Clock, Globe, Target, Heart, Zap, Shield } from "lucide-react"
 import { SiteLayout } from "@/components/site-layout"
 
@@ -90,12 +91,12 @@ export default function NosotrosPage() {
                 Durante más de 35 años, hemos sido la tienda de los expertos, brindando soluciones integrales en soldaduyra y corte para impulsar el crecimiento de la industria metalmecánica.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors">
+                <Link href="/productos" className="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors">
                   Conoce Nuestros Productos
-                </button>
-                <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-blue-800 transition-colors">
+                </Link>
+                <Link href="/atencion" className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-blue-800 transition-colors">
                   Contáctanos
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -320,9 +321,9 @@ export default function NosotrosPage() {
               por qué somos la tienda de los expertos.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors">
+              <Link href="/productos" className="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors">
                 Ver Catálogo
-              </button>
+              </Link>
               {/* <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-blue-800 transition-colors">
                 Solicitar Cotización
               </button> */}
