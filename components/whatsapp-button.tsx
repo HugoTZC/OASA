@@ -2,6 +2,7 @@
 
 import { MessageCircle } from "lucide-react"
 import { useRef, useState, type MouseEvent, type PointerEvent } from "react"
+import { mexicanWhatsAppUrl, readContactNumber } from "@/lib/contact"
 
 export function WhatsAppButton() {
   const [touchExpanded, setTouchExpanded] = useState(false)
