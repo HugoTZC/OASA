@@ -1,16 +1,23 @@
 "use client"
 
 import { Mail, X } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { formatPhoneNumber, readContactNumber } from "@/lib/contact"
 import { useSiteSettingsContext } from "@/contexts/site-settings-context"
 
 export function TopBanner() {
   const [isVisible, setIsVisible] = useState(true)
+  const [landLine, setLandLine] = useState("")
   const { getSetting, themeColors } = useSiteSettingsContext()
+
+  useEffect(() => {
+    setLandLine(readContactNumber("landLine"))
+  }, [])
 
   const bannerEnabled = getSetting('banner_enabled', true)
   const bannerSlogan = getSetting('banner_slogan', 'La tienda de los expertos')
-  const bannerContact = getSetting('banner_contact', '656-123-4567')
+  const configuredBannerContact = getSetting('banner_contact', '')
+  const bannerContact = landLine ? formatPhoneNumber(landLine) : configuredBannerContact
 
   if (!isVisible || !bannerEnabled) return null
 
