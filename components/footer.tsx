@@ -8,7 +8,7 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
           {/* OASA Column */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <h3 className="text-yellow-400 font-bold text-base sm:text-lg mb-3 sm:mb-4">Oxígeno y Soldaduras de Juárez SA de CV</h3>
+            <h3 className="whitespace-nowrap text-yellow-400 font-bold text-sm sm:text-base md:text-lg tracking-tight mb-3 sm:mb-4">Oxígeno y Soldaduras de Juárez SA de CV</h3>
             <p className="text-xs sm:text-sm mb-3 sm:mb-4">
               Oscar Flores 2695
             </p>
@@ -86,7 +86,7 @@ export function Footer() {
           </div> */}
 
           {/* Contact Button */}
-          <div className="text-center">
+          <div className="justify-self-end text-right lg:col-start-4">
             <Link href="/atencion" className="inline-block bg-yellow-400 text-black px-6 py-3 rounded-md font-bold hover:bg-yellow-300 transition-colors">
               Contáctanos
             </Link>
