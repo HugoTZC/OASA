@@ -128,13 +128,34 @@ export default function ProductsPage() {
   const filters: ProductFilters = {
     page: currentPage,
     limit: 12,
-    sortBy,
-    sortOrder,
+    // The API must paginate by hierarchy so featured products are not left
+    // on later pages when the user searches or filters by category.
+    sortBy: "hierarchy",
+    sortOrder: "asc",
     ...(selectedCategory !== "Todos los Productos" && { category: selectedCategoryData?.code || selectedCategory }),
     ...(searchQuery && { search: searchQuery }),
   }
 
   const { products, loading, error, pagination, refetch } = useProducts(filters)
+
+  const prioritizedProducts = [...products].sort((a, b) => {
+    const featuredDifference = Number(Boolean(b.isFeatured || b.hierarchy === 1)) - Number(Boolean(a.isFeatured || a.hierarchy === 1))
+    if (featuredDifference !== 0) return featuredDifference
+
+    const hierarchyA = Number.isFinite(a.hierarchy) ? a.hierarchy : Number.MAX_SAFE_INTEGER
+    const hierarchyB = Number.isFinite(b.hierarchy) ? b.hierarchy : Number.MAX_SAFE_INTEGER
+    if (hierarchyA !== hierarchyB) return hierarchyA - hierarchyB
+
+    if (sortBy === "created_at") {
+      return sortOrder === "desc"
+        ? b.createdAt.localeCompare(a.createdAt)
+        : a.createdAt.localeCompare(b.createdAt)
+    }
+
+    return sortOrder === "desc"
+      ? b.name.localeCompare(a.name)
+      : a.name.localeCompare(b.name)
+  })
 
   useEffect(() => {
     if (categoryParam && categories.length > 0) {
@@ -342,7 +363,7 @@ export default function ProductsPage() {
                     viewMode === "grid" ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" : "grid-cols-1"
                   }`}
                 >
-                  {products.map((product, index) => (
+                  {prioritizedProducts.map((product, index) => (
                     <ProductCard 
                       key={product.id} 
                       product={product} 
