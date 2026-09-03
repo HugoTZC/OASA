@@ -63,7 +63,7 @@ export interface ProductsResponse {
 export interface ProductFilters {
   category?: string;
   search?: string;
-  sortBy?: 'name' | 'price' | 'rating' | 'created_at';
+  sortBy?: 'name' | 'price' | 'rating' | 'created_at' | 'hierarchy';
   sortOrder?: 'asc' | 'desc';
   page?: number;
   limit?: number;
