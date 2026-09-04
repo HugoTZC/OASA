@@ -176,7 +176,8 @@ export default function AtencionPage() {
           </div>
         </section>
 
-        {/* Contact Form Section */}
+        {/* Formulario deshabilitado temporalmente: ALTCHA y esta sección se habilitarán cuando el cliente los contrate. */}
+        {false && (
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto">
@@ -314,6 +315,7 @@ export default function AtencionPage() {
             </div>
           </div>
         </section>
+        )}
 
         {/* Contact Methods */}
         <section className="py-16 bg-gray-50">
@@ -324,18 +326,18 @@ export default function AtencionPage() {
                 Elige el método que más te convenga para comunicarte con nosotros
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="flex flex-wrap justify-center gap-8">
               {contactMethods.map((method, index) => {
                 const IconComponent = method.icon
                 return (
-                  <div key={index} className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                  <div key={index} className="w-full max-w-sm bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
                     <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
                       <IconComponent className="w-8 h-8 text-green-800" />
                     </div>
                     <h3 className="text-xl font-bold mb-2 text-gray-900">{method.title}</h3>
                     <p className="text-2xl font-bold text-green-800 mb-2">{method.info === "LAND_LINE" ? formatPhoneNumber(contactNumbers.landLine) : method.info === "WA_LINE" ? formatPhoneNumber(contactNumbers.waLine) : method.info}</p>
                     <p className="text-gray-600 mb-3">{method.description}</p>
-                    <span className="text-sm text-blue-800 font-medium">{method.available}</span>
+
                   </div>
                 )
               })}
