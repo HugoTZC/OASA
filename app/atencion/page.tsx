@@ -164,7 +164,7 @@ export default function AtencionPage() {
                   Llamar Ahora
                 </a>
                 */}                <a 
-                  href={mexicanWhatsAppUrl(contactNumbers.waLine, "Hola Tiendaoasa, tengo una consulta")}
+                  href={mexicanWhatsAppUrl(contactNumbers.waLine, "Buen día, me gustaría recibir información sobre sus productos. Gracias.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors inline-block text-center"
@@ -177,7 +177,7 @@ export default function AtencionPage() {
         </section>
 
         {/* Contact Form Section */}
-        {/* <section className="py-16 bg-white">
+        <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-12">
@@ -276,7 +276,7 @@ export default function AtencionPage() {
                   />
                 </div>
 
-                {/* ALTCHA Captcha }
+                {/* ALTCHA Captcha */}
                 <div className="mb-6 flex justify-center">
                   <div className="bg-white p-4 rounded-lg border border-gray-200">
                     <Altcha />
@@ -313,7 +313,7 @@ export default function AtencionPage() {
               </form>
             </div>
           </div>
-        </section> */}
+        </section>
 
         {/* Contact Methods */}
         <section className="py-16 bg-gray-50">
@@ -324,17 +324,18 @@ export default function AtencionPage() {
                 Elige el método que más te convenga para comunicarte con nosotros
               </p>
             </div>
-            <div className="flex flex-wrap justify-center gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {contactMethods.map((method, index) => {
                 const IconComponent = method.icon
                 return (
-                  <div key={index} className="w-full max-w-sm bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                  <div key={index} className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
                     <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
                       <IconComponent className="w-8 h-8 text-green-800" />
                     </div>
                     <h3 className="text-xl font-bold mb-2 text-gray-900">{method.title}</h3>
                     <p className="text-2xl font-bold text-green-800 mb-2">{method.info === "LAND_LINE" ? formatPhoneNumber(contactNumbers.landLine) : method.info === "WA_LINE" ? formatPhoneNumber(contactNumbers.waLine) : method.info}</p>
                     <p className="text-gray-600 mb-3">{method.description}</p>
+                    <span className="text-sm text-blue-800 font-medium">{method.available}</span>
                   </div>
                 )
               })}
@@ -478,3 +479,4 @@ export default function AtencionPage() {
     </SiteLayout>
   )
 }
+
