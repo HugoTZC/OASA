@@ -2,8 +2,8 @@
 
 import { Phone, Mail, Clock, MessageCircle, Headphones, Send } from "lucide-react"
 import { SiteLayout } from "@/components/site-layout"
-import Altcha from "@/components/altcha"
-import { useEffect, useState } from "react"
+import Altcha, { type AltchaRef } from "@/components/altcha"
+import { useEffect, useRef, useState } from "react"
 import { formatPhoneNumber, mexicanWhatsAppUrl, readContactNumber } from "@/lib/contact"
 
 const representatives = [
@@ -114,6 +114,7 @@ export default function AtencionPage() {
   const [contactNumbers, setContactNumbers] = useState({ landLine: "", waLine: "" })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
+  const altchaRef = useRef<AltchaRef>(null)
 
   useEffect(() => {
     setContactNumbers({
@@ -129,18 +130,32 @@ export default function AtencionPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
     setIsSubmitting(true)
-    
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    
-    setIsSubmitting(false)
-    setSubmitSuccess(true)
-    setFormData({ name: "", email: "", phone: "", subject: "", message: "" })
-    
-    // Reset success message after 5 seconds
-    setTimeout(() => setSubmitSuccess(false), 5000)
+    setSubmitSuccess(false)
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          captcha: altchaRef.current?.value,
+        }),
+      })
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || "No fue posible enviar el mensaje.")
+      }
+
+      setSubmitSuccess(true)
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" })
+    } catch (error) {
+      console.error(error)
+      window.alert(error instanceof Error ? error.message : "No fue posible enviar el mensaje.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -280,7 +295,7 @@ export default function AtencionPage() {
                 {/* ALTCHA Captcha */}
                 <div className="mb-6 flex justify-center">
                   <div className="bg-white p-4 rounded-lg border border-gray-200">
-                    <Altcha />
+                    <Altcha ref={altchaRef} />
                   </div>
                 </div>
 
