@@ -14,15 +14,15 @@ export default function SucursalesPage() {
     <SiteLayout>
       <div className="container mx-auto px-4 py-8">
         <h1 className="mb-8 text-4xl font-bold">Sucursales</h1>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8">
           {branches.map((branch) => (
-            <div key={branch.city} className="rounded-lg bg-white p-6 shadow-md">
-              <h3 className="mb-4 text-xl font-bold">{branch.city}</h3>
-              <p className="mb-2 text-gray-600">{branch.address}</p>
-              <p className="mb-2 text-gray-600">Tel: {branch.phone}</p>
-              <p className="mb-2 break-words text-gray-600">{branch.email}</p>
-              {branch.hours.map((hours) => <p key={hours} className="text-gray-600">{hours}</p>)}
-              <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(branch.mapsQuery)}`} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block text-blue-700 underline hover:text-blue-900">
+            <div key={branch.city} className="bg-white p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-bold mb-4">{branch.city}</h3>
+              <p className="text-gray-600 mb-2">{branch.address}</p>
+              <p className="text-gray-600 mb-2">Tel: {branch.phone}</p>
+              <p className="text-gray-600 mb-2">{branch.email}</p>
+              {branch.hours.map((hours) => <p key={hours} className="text-gray-600 mb-2">{hours}</p>)}
+              <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(branch.mapsQuery)}`} target="_blank" rel="noopener noreferrer" className="text-gray-600 underline hover:text-blue-700">
                 Ver en Google Maps
               </a>
             </div>
