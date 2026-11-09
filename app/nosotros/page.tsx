@@ -1,5 +1,4 @@
 import Image from "next/image"
-import Link from "next/link"
 import { Users, Award, Clock, Globe, Target, Heart, Zap, Shield } from "lucide-react"
 import { SiteLayout } from "@/components/site-layout"
 
@@ -91,12 +90,12 @@ export default function NosotrosPage() {
                 Durante más de 35 años, hemos sido la tienda de los expertos, brindando soluciones integrales en soldaduyra y corte para impulsar el crecimiento de la industria metalmecánica.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/productos" className="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors">
+                <button className="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors">
                   Conoce Nuestros Productos
-                </Link>
-                <Link href="/atencion" className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-blue-800 transition-colors">
+                </button>
+                <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-blue-800 transition-colors">
                   Contáctanos
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -213,7 +212,7 @@ export default function NosotrosPage() {
               <div className="relative">
                 <div className="aspect-square bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center">
                   <Image
-                    src="/placeholder.svg?height=400&width=400"
+                    src="/Mision.jpeg"
                     alt="OASA Mission"
                     width={400}
                     height={400}
@@ -321,9 +320,9 @@ export default function NosotrosPage() {
               por qué somos la tienda de los expertos.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/productos" className="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors">
+              <button className="bg-yellow-400 text-black px-8 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-colors">
                 Ver Catálogo
-              </Link>
+              </button>
               {/* <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-blue-800 transition-colors">
                 Solicitar Cotización
               </button> */}
@@ -334,3 +333,4 @@ export default function NosotrosPage() {
     </SiteLayout>
   )
 }
+
