@@ -1,3 +1,4 @@
+import { Clock, Mail, Phone } from "lucide-react"
 import { SiteLayout } from "@/components/site-layout"
 
 const branches = [
@@ -14,17 +15,39 @@ export default function SucursalesPage() {
     <SiteLayout>
       <div className="container mx-auto px-4 py-8">
         <h1 className="mb-8 text-4xl font-bold">Sucursales</h1>
-        <div className="grid grid-cols-1 gap-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {branches.map((branch) => (
-            <div key={branch.city} className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold mb-4">{branch.city}</h3>
-              <p className="text-gray-600 mb-2">{branch.address}</p>
-              <p className="text-gray-600 mb-2">Tel: {branch.phone}</p>
-              <p className="text-gray-600 mb-2">{branch.email}</p>
-              {branch.hours.map((hours) => <p key={hours} className="text-gray-600 mb-2">{hours}</p>)}
-              <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(branch.mapsQuery)}`} target="_blank" rel="noopener noreferrer" className="text-gray-600 underline hover:text-blue-700">
-                Ver en Google Maps
-              </a>
+            <div key={branch.city} className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
+              <div className="text-center mb-4">
+                <h3 className="text-xl font-bold text-gray-900">{branch.city}</h3>
+                <p className="text-blue-800 font-medium">{branch.address}</p>
+              </div>
+
+              <div className="space-y-3 mb-4">
+                <div className="flex items-center">
+                  <Phone className="w-4 h-4 text-green-600 mr-3" />
+                  <span className="text-gray-700">{branch.phone}</span>
+                </div>
+                <div className="flex items-center">
+                  <Mail className="w-4 h-4 text-blue-600 mr-3" />
+                  <span className="text-gray-700 text-sm break-all">{branch.email}</span>
+                </div>
+                <div className="flex items-center">
+                  <Clock className="w-4 h-4 text-orange-600 mr-3" />
+                  <span className="text-gray-700 text-sm">{branch.hours.join(" | ")}</span>
+                </div>
+              </div>
+
+              <iframe
+                src={`https://www.google.com/maps?q=${encodeURIComponent(branch.mapsQuery)}&output=embed`}
+                width="100%"
+                height="300"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title={`Mapa de ${branch.city}`}
+              />
             </div>
           ))}
         </div>
